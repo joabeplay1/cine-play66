@@ -818,15 +818,15 @@ function saveVideo() {
 renderHome();</script>
   <h2>Login</h2>
 
-<input type="email" id="email" placeholder="Digite seu email">
-<br><br>
-<input type="password" id="senha" placeholder="Digite sua senha">
-<br><br>
-
-<button onclick="login()">Entrar</button>
-<button onclick="cadastrar()">Cadastrar</button>
-
-<p id="msg"></p>
+<script>
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    document.getElementById("app").style.display = "block";
+  } else {
+    document.getElementById("app").style.display = "none";
+  }
+});
+</script>
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
