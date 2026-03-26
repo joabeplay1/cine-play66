@@ -132,6 +132,48 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   <script>// CenaPlay — Gerado automaticamente
 let videos = [
   {
+    "id": "69c5579c214cb829970d53f8",
+    "title": "SE BEBER NAO CASE 3 KKKKKKKK",
+    "description": "IRA MORRER DE RIR",
+    "category": "comedia",
+    "anime_subcategory": "",
+    "source": "google_drive",
+    "video_url": "https://drive.google.com/file/d/1mGim8GitvsKo7r2k_bO3-ziXsD-eCSs9/view?usp=drive_link",
+    "thumbnail_url": "",
+    "year": "",
+    "duration": "",
+    "rating": 0,
+    "is_favorite": false
+  },
+  {
+    "id": "69c55658c9af337ccfe9972f",
+    "title": "VELOZES E FURIOSOS EM ESPANHOL",
+    "description": "",
+    "category": "comedia",
+    "anime_subcategory": "",
+    "source": "google_drive",
+    "video_url": "https://drive.google.com/file/d/14YDwXv3kqaF9ipiq4a-lp1_9gXMlXEfy/view?usp=drive_link",
+    "thumbnail_url": "",
+    "year": "",
+    "duration": "",
+    "rating": 0,
+    "is_favorite": false
+  },
+  {
+    "id": "69c555f755d123e4f47baf50",
+    "title": "MADARA RINDO KKKKKKKKKKKKKKKKKKK",
+    "description": "",
+    "category": "animacao",
+    "anime_subcategory": "naruto_shippuden",
+    "source": "google_drive",
+    "video_url": "https://drive.google.com/file/d/10jECUzhgdp0pMcoEAGfKFUH8xDTYGziJ/view?usp=drive_link",
+    "thumbnail_url": "",
+    "year": "",
+    "duration": "",
+    "rating": 0,
+    "is_favorite": false
+  },
+  {
     "id": "69c55267d9f959ddb246a932",
     "title": "ALOK COPACABANA 2026",
     "description": "",
