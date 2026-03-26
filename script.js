@@ -818,3 +818,20 @@ function saveVideo() {
 renderHome();</script>
 </body>
 </html>
+/* --- LÓGICA DO LOGIN --- */
+const formLogin = document.getElementById('form-login');
+
+// Só roda esse código se o formulário existir na tela
+if (formLogin) { 
+    formLogin.addEventListener('submit', function(event) {
+        // Isso aqui impede a página de recarregar (dar aquela piscada chata)
+        event.preventDefault(); 
+
+        // Pega o que o usuário digitou nas caixinhas
+        const email = document.getElementById('email-usuario').value;
+        const senha = document.getElementById('senha-usuario').value;
+
+        // Mostra um aviso na tela só pra gente ver se funcionou!
+        alert('Testando! O e-mail que você digitou foi: ' + email);
+    });
+}
