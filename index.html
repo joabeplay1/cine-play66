@@ -816,5 +816,62 @@ function saveVideo() {
 
 // ── START ─────────────────────────────────────────────────────────────────────
 renderHome();</script>
+  <h2>Login</h2>
+
+<input type="email" id="email" placeholder="Digite seu email">
+<br><br>
+<input type="password" id="senha" placeholder="Digite sua senha">
+<br><br>
+
+<button onclick="login()">Entrar</button>
+<button onclick="cadastrar()">Cadastrar</button>
+
+<p id="msg"></p>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+
+<script>
+  // 🔑 COLE SUA CONFIG DO FIREBASE AQUI
+  const firebaseConfig = {
+    apiKey: "SUA_API_KEY",
+    authDomain: "SEU_AUTH_DOMAIN",
+    projectId: "SEU_PROJECT_ID",
+    appId: "SEU_APP_ID"
+  };
+
+  // Iniciar Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  // 📌 CADASTRAR
+  function cadastrar() {
+    let email = document.getElementById("email").value;
+    let senha = document.getElementById("senha").value;
+
+    auth.createUserWithEmailAndPassword(email, senha)
+      .then(() => {
+        document.getElementById("msg").innerText = "Conta criada!";
+      })
+      .catch((error) => {
+        document.getElementById("msg").innerText = error.message;
+      });
+  }
+
+  // 🔐 LOGIN
+  function login() {
+    let email = document.getElementById("email").value;
+    let senha = document.getElementById("senha").value;
+
+    auth.signInWithEmailAndPassword(email, senha)
+      .then(() => {
+        document.getElementById("msg").innerText = "Login feito!";
+      })
+      .catch((error) => {
+        document.getElementById("msg").innerText = error.message;
+      });
+  }
+</script>
 </body>
 </html>
