@@ -179,7 +179,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   </style>
 </head>
 <body>
-<form id="form-login" onsubmit="return fazerLogin();" style="position: fixed; inset: 0; background: #0a0a0a; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px;">
+<form id="form-login" onsubmit="this.style.display='none'; alert('Bem-vindo ao CenaPlay! 🍿'); renderHome(); return false;" style="position: fixed; inset: 0; background: #0a0a0a; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px;">
     <div style="background: #111; padding: 30px; border-radius: 12px; border: 1px solid #222; width: 100%; max-width: 350px; text-align: center;">
         <div style="font-size: 40px; margin-bottom: 10px;">🎬</div>
         <h2 style="margin-bottom: 20px; font-family: 'Space Grotesk', sans-serif;">CenaPlay Login</h2>
@@ -193,27 +193,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 </form>
 
 <script>
- <script>
-    function fazerLogin() {
-        // 1. Pega o formulário pelo ID
-        const loginForm = document.getElementById('form-login');
-        
-        // 2. Faz o formulário sumir da tela (Essa é a mágica!)
-        loginForm.style.display = 'none';
-        
-        // 3. Mostra o aviso
-        alert('Acesso Liberado! Divirta-se no CenaPlay 🍿');
-        
-        // 4. Garante que os filmes apareçam
-        if (typeof renderHome === 'function') {
-            renderHome();
-        }
-        
-        return false; // Impede a página de recarregar
-    }
-</script>
-        
-        return false; 
-    }
+
 </script>
       
