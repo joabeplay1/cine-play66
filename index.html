@@ -193,18 +193,25 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 </form>
 
 <script>
+ <script>
     function fazerLogin() {
+        // 1. Pega o formulário pelo ID
         const loginForm = document.getElementById('form-login');
-        const email = document.getElementById('email-usuario').value;
         
-        // Faz o login sumir
+        // 2. Faz o formulário sumir da tela (Essa é a mágica!)
         loginForm.style.display = 'none';
         
-        // Mensagem de boas-vindas personalizada
-        alert('Seja bem-vindo ao CenaPlay, ' + email + '! 🍿');
+        // 3. Mostra o aviso
+        alert('Acesso Liberado! Divirta-se no CenaPlay 🍿');
         
-        // IMPORTANTE: Isso aqui desenha os filmes na tela!
-        renderHome(); 
+        // 4. Garante que os filmes apareçam
+        if (typeof renderHome === 'function') {
+            renderHome();
+        }
+        
+        return false; // Impede a página de recarregar
+    }
+</script>
         
         return false; 
     }
