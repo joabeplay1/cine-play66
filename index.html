@@ -922,5 +922,42 @@ function saveVideo() {
 
 // ── START ─────────────────────────────────────────────────────────────────────
 if (isLoggedIn()) { renderHome(); } else { renderLogin(); }</script>
+<!-- BOTÃO -->
+<button onclick="loginGoogle()">Entrar com Google</button>
+<p id="msg"></p>
+
+<!-- FIREBASE + LOGIN -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider } 
+  from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCsX53vC0PWIWGK5JVMfxXeKrchvj_GhYA",
+    authDomain: "cineplay-e690b.firebaseapp.com",
+    projectId: "cineplay-e690b",
+    storageBucket: "cineplay-e690b.firebasestorage.app",
+    messagingSenderId: "840544476635",
+    appId: "1:840544476635:web:6c8c70c17fa0aecda69bfe"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  // FUNÇÃO DO BOTÃO
+  window.loginGoogle = function () {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        document.getElementById("msg").innerText =
+          "Logado como: " + user.email;
+      })
+      .catch((error) => {
+        document.getElementById("msg").innerText =
+          "Erro: " + error.message;
+      });
+  };
+</script>
 </body>
 </html>
