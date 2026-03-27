@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CenaPlay</title>
+  <title>Cine Play</title>
   <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -14,6 +14,20 @@
 }
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg2);}::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:3px;}
+
+/* LOGIN */
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+.login-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:40px;width:100%;max-width:400px;text-align:center;}
+.login-logo{width:56px;height:56px;background:var(--primary);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;}
+.login-title{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;margin-bottom:6px;}
+.login-sub{color:var(--text-muted);font-size:14px;margin-bottom:28px;}
+.login-input{width:100%;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;outline:none;margin-bottom:12px;}
+.login-input:focus{border-color:var(--primary);}
+.login-btn{width:100%;padding:13px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;margin-top:4px;}
+.login-btn:hover{background:var(--primary-dark);}
+.login-error{color:#f87171;font-size:13px;margin-top:10px;display:none;}
+.logout-btn{background:var(--bg3);color:var(--text-muted);border:1px solid var(--border);padding:6px 14px;border-radius:999px;font-size:12px;cursor:pointer;transition:all .2s;}
+.logout-btn:hover{color:var(--primary);border-color:var(--primary);}
 
 /* NAVBAR */
 .navbar{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
@@ -129,7 +143,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 </head>
 <body>
   <div id="app"></div>
-  <script>// CenaPlay — Gerado automaticamente
+  <script>// Cine Play — Gerado automaticamente
+// SENHA DE ACESSO — altere o valor abaixo para sua senha
+const ACCESS_PASSWORD = 'cineplay123';
+
 let videos = [
   {
     "id": "69c5579c214cb829970d53f8",
@@ -137,6 +154,7 @@ let videos = [
     "description": "IRA MORRER DE RIR",
     "category": "comedia",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1mGim8GitvsKo7r2k_bO3-ziXsD-eCSs9/view?usp=drive_link",
     "thumbnail_url": "",
@@ -151,6 +169,7 @@ let videos = [
     "description": "",
     "category": "comedia",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/14YDwXv3kqaF9ipiq4a-lp1_9gXMlXEfy/view?usp=drive_link",
     "thumbnail_url": "",
@@ -165,6 +184,7 @@ let videos = [
     "description": "",
     "category": "animacao",
     "anime_subcategory": "naruto_shippuden",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/10jECUzhgdp0pMcoEAGfKFUH8xDTYGziJ/view?usp=drive_link",
     "thumbnail_url": "",
@@ -179,6 +199,7 @@ let videos = [
     "description": "",
     "category": "musica_ao_vivo",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1BmudgnWJShrQifYmwl-2qBlZqM01oeAS/view?usp=drive_link",
     "thumbnail_url": "",
@@ -193,6 +214,7 @@ let videos = [
     "description": "",
     "category": "musica_ao_vivo",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1DwRlCYh9rrWiLTYWSqERNOmxJAsfjUDo/view?usp=drive_link",
     "thumbnail_url": "",
@@ -207,6 +229,7 @@ let videos = [
     "description": "",
     "category": "animacao",
     "anime_subcategory": "naruto_shippuden",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/15qVjhEiH-AO6U7Gt6e0rqf2bQKgvzCK2/view?usp=drive_link",
     "thumbnail_url": "",
@@ -221,6 +244,7 @@ let videos = [
     "description": "",
     "category": "animacao",
     "anime_subcategory": "naruto_shippuden",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1EsRzJ_dnrfbdLzOcu8h0NOKqDpgqNYE3/view?usp=drive_link",
     "thumbnail_url": "",
@@ -235,6 +259,7 @@ let videos = [
     "description": "",
     "category": "animacao",
     "anime_subcategory": "naruto_shippuden",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1FF4SWDWrw9XtmsLmlRVrHfJ_2dE_oQHC/view?usp=drive_link",
     "thumbnail_url": "",
@@ -249,6 +274,7 @@ let videos = [
     "description": "",
     "category": "outro",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1QDt5mJ49dtv7sX833nPQN1IGR8xHBSLJ/view?usp=drive_link",
     "thumbnail_url": "",
@@ -263,6 +289,7 @@ let videos = [
     "description": "",
     "category": "outro",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1YZeE-UG_-1HKTzG8ptwdzMSbsZLeRXwP/view?usp=drive_link",
     "thumbnail_url": "",
@@ -277,6 +304,7 @@ let videos = [
     "description": "",
     "category": "filme",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1a6JNQDhN5uKCdGl0DuwfLSngkgLOcR12/view?usp=drive_link",
     "thumbnail_url": "",
@@ -291,6 +319,7 @@ let videos = [
     "description": "",
     "category": "videos_engracados",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1GhtcgwZaJkEWpXx_MnxjhhMBun_jgDGA/view?usp=drive_link",
     "thumbnail_url": "",
@@ -305,6 +334,7 @@ let videos = [
     "description": "",
     "category": "videos_engracados",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/14DyAnKhiiQuBvoxNZK0G65EZO7VyECVO/view?usp=drive_link",
     "thumbnail_url": "",
@@ -319,6 +349,7 @@ let videos = [
     "description": "",
     "category": "videos_engracados",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1vLXphuxhWzdSkfjhxcKlEJiSJMUhA4w5/view?usp=drive_link",
     "thumbnail_url": "",
@@ -333,6 +364,7 @@ let videos = [
     "description": "",
     "category": "videos_engracados",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1BAgdPBELgOhWdSnoFGK5YLNRsRoA83Mv/view?usp=drive_link",
     "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/cf642af4a_ChatGPTImage26demarde202611_55_18.png",
@@ -347,6 +379,7 @@ let videos = [
     "description": "",
     "category": "videos_engracados",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1tGXiLVPI-xbHCf39g9JNm-GyTwytOiqV/view?usp=drive_link",
     "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/f9cfe7596_ChatGPTImage26demarde202611_47_47.png",
@@ -361,6 +394,7 @@ let videos = [
     "description": "",
     "category": "videos_engracados",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1spzZyZ-ykx75Wlyu_kGID7yKBsiKKp4l/view?usp=drive_link",
     "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/55be0c549_Gemini_Generated_Image_cjxiwucjxiwucjxi.png",
@@ -375,6 +409,7 @@ let videos = [
     "description": "Uma equipe de exploradores viaja através de um buraco de minhoca no espaço em busca de um novo lar para a humanidade.",
     "category": "filme",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "youtube",
     "video_url": "https://www.youtube.com/watch?v=zSWdZVtXT7E",
     "thumbnail_url": "",
@@ -389,6 +424,7 @@ let videos = [
     "description": "Documentário da BBC que explora a beleza natural e selvagem do nosso planeta com tecnologia de câmeras de última geração.",
     "category": "documentario",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "youtube",
     "video_url": "https://www.youtube.com/watch?v=c8aFcHFu8QM",
     "thumbnail_url": "",
@@ -403,6 +439,7 @@ let videos = [
     "description": "Durante a mudança de sua família, Chihiro entra em um mundo governado por deuses, bruxas e espíritos.",
     "category": "animacao",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "youtube",
     "video_url": "https://www.youtube.com/watch?v=ByXuk9QqQkk",
     "thumbnail_url": "",
@@ -417,6 +454,7 @@ let videos = [
     "description": "Rádio de música lo-fi para relaxar e estudar. Transmissão ao vivo 24/7.",
     "category": "musica",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "youtube",
     "video_url": "https://www.youtube.com/watch?v=jfKfPfyJRdk",
     "thumbnail_url": "",
@@ -431,6 +469,7 @@ let videos = [
     "description": "Um professor de química do ensino médio diagnosticado com câncer de pulmão começa a fabricar metanfetamina.",
     "category": "serie",
     "anime_subcategory": "",
+    "music_subcategory": "",
     "source": "youtube",
     "video_url": "https://www.youtube.com/watch?v=HhesaQXLuRY",
     "thumbnail_url": "",
@@ -443,9 +482,9 @@ let videos = [
 let currentPage = 'home';
 let currentCategory = 'all';
 let currentAnimeSubcat = '';
+let currentMusicSubcat = '';
 let currentSearch = '';
 let currentKaraokeSearch = '';
-let animeMenuOpen = false;
 let nextId = videos.length + 1;
 let currentThumbFile = null;
 
@@ -457,6 +496,44 @@ const catLabels = {
 const animeSubLabels = {
   naruto_shippuden:'Naruto Shippuden', dragon_ball:'Dragon Ball', dragon_ball_dime:'Dragon Ball Dime'
 };
+const musicSubLabels = {
+  funk:'Funk', pagode:'Pagode', gospel:'Gospel', pop:'Pop', forro:'Forró', eletronica:'Eletrônica'
+};
+
+// ── LOGIN ─────────────────────────────────────────────────────────────────────
+function isLoggedIn() { return sessionStorage.getItem('cp_auth') === '1'; }
+
+function renderLogin() {
+  document.getElementById('app').innerHTML = `
+    <div class="login-page">
+      <div class="login-box">
+        <div class="login-logo">🎬</div>
+        <div class="login-title">Cine Play</div>
+        <div class="login-sub">Digite a senha para acessar</div>
+        <input class="login-input" type="password" id="loginPass" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')doLogin()" />
+        <button class="login-btn" onclick="doLogin()">Entrar</button>
+        <div class="login-error" id="loginError">Senha incorreta. Tente novamente.</div>
+      </div>
+    </div>
+  `;
+  setTimeout(() => document.getElementById('loginPass')?.focus(), 100);
+}
+
+function doLogin() {
+  const val = document.getElementById('loginPass')?.value;
+  if (val === ACCESS_PASSWORD) {
+    sessionStorage.setItem('cp_auth', '1');
+    renderHome();
+  } else {
+    const err = document.getElementById('loginError');
+    if (err) { err.style.display = 'block'; }
+  }
+}
+
+function doLogout() {
+  sessionStorage.removeItem('cp_auth');
+  renderLogin();
+}
 
 function getThumbnail(v) {
   if (v.thumbnail_url) return v.thumbnail_url;
@@ -477,6 +554,7 @@ function getDriveId(url) {
 
 // ── HOME ──────────────────────────────────────────────────────────────────────
 function renderHome() {
+  if (!isLoggedIn()) { renderLogin(); return; }
   currentPage = 'home';
   const categories = [
     {key:'all',label:'🎞 Todos'},{key:'favoritos',label:'❤️ Favoritos'},
@@ -486,15 +564,11 @@ function renderHome() {
     {key:'musica_ao_vivo',label:'🎤 Ao Vivo'},{key:'videos_engracados',label:'😄 Engraçados'},
     {key:'karaoke',label:'🎙 Karaokê'},{key:'documentario',label:'📚 Docs'},
   ];
-  const animeSubcats = [
-    {key:'',label:'Todos os Animes'},{key:'naruto_shippuden',label:'Naruto Shippuden'},
-    {key:'dragon_ball',label:'Dragon Ball'},{key:'dragon_ball_dime',label:'Dragon Ball Dime'}
-  ];
 
   document.getElementById('app').innerHTML = `
     <nav class="navbar">
       <button class="logo" onclick="renderHome()">
-        <div class="logo-icon">🎬</div><span class="logo-text">CenaPlay</span>
+        <div class="logo-icon">🎬</div><span class="logo-text">Cine Play</span>
       </button>
       <div class="search-wrap">
         <span class="search-icon">🔍</span>
@@ -503,6 +577,7 @@ function renderHome() {
       <div class="navbar-actions">
         <button class="btn-karaoke" onclick="renderKaraoke()">🎙 Karaokê</button>
         <button class="btn-add" onclick="openModal()">+ Adicionar</button>
+        <button class="logout-btn" onclick="doLogout()">Sair</button>
       </div>
     </nav>
     <div class="main">
@@ -510,7 +585,7 @@ function renderHome() {
       <div class="categories" id="catFilter">
         ${categories.map(c=>`<button class="cat-btn ${currentCategory===c.key?'active':''}" onclick="setCategory('${c.key}')">${c.label}</button>`).join('')}
       </div>
-      <div id="animeSubsWrap"></div>
+      <div id="subMenuWrap"></div>
       <div id="gridWrap"></div>
     </div>
     <div class="modal-bg hidden" id="modalBg">
@@ -568,6 +643,18 @@ function renderHome() {
             <option value="dragon_ball_dime">Dragon Ball Dime</option>
           </select>
         </div>
+        <div id="musicSubWrap" style="display:none" class="form-group">
+          <label class="form-label">Estilo Musical</label>
+          <select class="form-select" id="musicSubcat">
+            <option value="">Selecionar...</option>
+            <option value="funk">Funk</option>
+            <option value="pagode">Pagode</option>
+            <option value="gospel">Gospel</option>
+            <option value="pop">Pop</option>
+            <option value="forro">Forró</option>
+            <option value="eletronica">Eletrônica</option>
+          </select>
+        </div>
         <div class="form-group">
           <label class="form-label">Capa do Vídeo</label>
           <div id="thumbSection">
@@ -584,7 +671,7 @@ function renderHome() {
       </div>
     </div>
   `;
-  renderAnimeSubcats();
+  renderSubMenu();
   renderHero();
   renderGrid();
   document.addEventListener('click', function bgClose(e) {
@@ -626,25 +713,39 @@ function clearThumb() {
 
 function onCatChange(val) {
   document.getElementById('animeSubWrap').style.display = val === 'animacao' ? 'block' : 'none';
+  document.getElementById('musicSubWrap').style.display = val === 'musica' ? 'block' : 'none';
 }
 
-function renderAnimeSubcats() {
-  const w = document.getElementById('animeSubsWrap');
+function renderSubMenu() {
+  const w = document.getElementById('subMenuWrap');
   if (!w) return;
-  if (currentCategory !== 'animacao') { w.innerHTML = ''; return; }
-  const subs = [{key:'',label:'Todos'},{key:'naruto_shippuden',label:'Naruto Shippuden'},{key:'dragon_ball',label:'Dragon Ball'},{key:'dragon_ball_dime',label:'Dragon Ball Dime'}];
-  w.innerHTML = '<div class="anime-subs">' + subs.map(s=>`<button class="anime-sub-btn ${currentAnimeSubcat===s.key?'active':''}" onclick="setAnimeSub('${s.key}')">${s.label}</button>`).join('') + '</div>';
+  if (currentCategory === 'animacao') {
+    const subs = [{key:'',label:'Todos'},{key:'naruto_shippuden',label:'Naruto Shippuden'},{key:'dragon_ball',label:'Dragon Ball'},{key:'dragon_ball_dime',label:'Dragon Ball Dime'}];
+    w.innerHTML = '<div class="anime-subs">' + subs.map(s=>`<button class="anime-sub-btn ${currentAnimeSubcat===s.key?'active':''}" onclick="setAnimeSub('${s.key}')">${s.label}</button>`).join('') + '</div>';
+  } else if (currentCategory === 'musica') {
+    const subs = [{key:'',label:'Todas'},{key:'funk',label:'Funk'},{key:'pagode',label:'Pagode'},{key:'gospel',label:'Gospel'},{key:'pop',label:'Pop'},{key:'forro',label:'Forró'},{key:'eletronica',label:'Eletrônica'}];
+    w.innerHTML = '<div class="anime-subs">' + subs.map(s=>`<button class="anime-sub-btn ${currentMusicSubcat===s.key?'active':''}" onclick="setMusicSub('${s.key}')">${s.label}</button>`).join('') + '</div>';
+  } else {
+    w.innerHTML = '';
+  }
 }
 
 function setAnimeSub(key) {
   currentAnimeSubcat = key;
-  renderAnimeSubcats();
+  renderSubMenu();
+  renderGrid();
+}
+
+function setMusicSub(key) {
+  currentMusicSubcat = key;
+  renderSubMenu();
   renderGrid();
 }
 
 function setCategory(cat) {
   currentCategory = cat;
   if (cat !== 'animacao') currentAnimeSubcat = '';
+  if (cat !== 'musica') currentMusicSubcat = '';
   if (cat === 'karaoke') { renderKaraoke(); return; }
   renderHome();
 }
@@ -660,6 +761,9 @@ function getFiltered() {
     else if (currentCategory === 'animacao') {
       mc = v.category === 'animacao';
       if (mc && currentAnimeSubcat) mc = v.anime_subcategory === currentAnimeSubcat;
+    } else if (currentCategory === 'musica') {
+      mc = v.category === 'musica';
+      if (mc && currentMusicSubcat) mc = v.music_subcategory === currentMusicSubcat;
     } else mc = v.category === currentCategory;
     return ms && mc;
   });
@@ -796,11 +900,13 @@ function saveVideo() {
   if (!url || !title) { alert('Preencha o título e a URL!'); return; }
   const cat = document.getElementById('videoCat').value;
   const animeEl = document.getElementById('animeSubcat');
+  const musicEl = document.getElementById('musicSubcat');
   const video = {
     id: 'local_'+nextId++, title,
     description: document.getElementById('videoDesc').value.trim(),
     category: cat,
     anime_subcategory: cat==='animacao'&&animeEl?animeEl.value:'',
+    music_subcategory: cat==='musica'&&musicEl?musicEl.value:'',
     source: currentSource, video_url: url,
     thumbnail_url: currentThumbFile || document.getElementById('videoThumb')?.value?.trim() || '',
     year: document.getElementById('videoYear').value.trim(),
@@ -815,6 +921,6 @@ function saveVideo() {
 }
 
 // ── START ─────────────────────────────────────────────────────────────────────
-renderHome();</script>
+if (isLoggedIn()) { renderHome(); } else { renderLogin(); }</script>
 </body>
 </html>
