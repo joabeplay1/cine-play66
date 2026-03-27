@@ -314,21 +314,6 @@ let videos = [
     "is_favorite": false
   },
   {
-    "id": "69c54ea7465e95012f686879",
-    "title": "PL SINISTRO KKKKKKKKKK",
-    "description": "",
-    "category": "videos_engracados",
-    "anime_subcategory": "",
-    "music_subcategory": "",
-    "source": "google_drive",
-    "video_url": "https://drive.google.com/file/d/1GhtcgwZaJkEWpXx_MnxjhhMBun_jgDGA/view?usp=drive_link",
-    "thumbnail_url": "",
-    "year": "",
-    "duration": "",
-    "rating": 0,
-    "is_favorite": false
-  },
-  {
     "id": "69c54d9f3c8f93b816997ac6",
     "title": "TIO Chucky de Chuchu: Um nome que tira toda a pose de mau dele",
     "description": "",
