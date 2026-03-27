@@ -1,45 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<body>
-  <!DOCTYPE html>
-<html lang="pt-br">
 <head>
-  <script type="text/javascript">
-    aclib.runAutoTag({
-        zoneId: 'f7sbci0iwf',
-    });
-</script>
-
-    <meta charset="UTF-8">
-    <title>Meu App com Login</title>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-</head>
-<body>
-<div id="meu-login-google">
-    <div id="g_id_onload"
-         data-client_id=661389788995-deac781hb2ndkq876pujccserja1kt86.apps.googleusercontent.com
-         data-callback="handleCredentialResponse">
-    </div>
-    <div class="g_id_signin" data-type="standard"></div>
-
- </div>   
-   <script>
-  function handleCredentialResponse(response) {
-    console.log("Login feito com sucesso!");
-    document.getElementById('meu-login-google').style.display = 'none';
-    
-    // 1. Salvamos no "caderno" do navegador que o usuário está logado
-    sessionStorage.setItem('cp_auth', '1');
-    
-    // 2. Chamamos a função que desenha a página dos vídeos na tela
-    renderHome();
-  }
-</script>
-
-</body>
-</html>
-  
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cine Play</title>
@@ -346,21 +307,6 @@ let videos = [
     "music_subcategory": "",
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1a6JNQDhN5uKCdGl0DuwfLSngkgLOcR12/view?usp=drive_link",
-    "thumbnail_url": "",
-    "year": "",
-    "duration": "",
-    "rating": 0,
-    "is_favorite": false
-  },
-  {
-    "id": "69c54ea7465e95012f686879",
-    "title": "PL SINISTRO KKKKKKKKKK",
-    "description": "",
-    "category": "videos_engracados",
-    "anime_subcategory": "",
-    "music_subcategory": "",
-    "source": "google_drive",
-    "video_url": "https://drive.google.com/file/d/1GhtcgwZaJkEWpXx_MnxjhhMBun_jgDGA/view?usp=drive_link",
     "thumbnail_url": "",
     "year": "",
     "duration": "",
@@ -961,43 +907,5 @@ function saveVideo() {
 
 // ── START ─────────────────────────────────────────────────────────────────────
 if (isLoggedIn()) { renderHome(); } else { renderLogin(); }</script>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyCsX53vC0PWIWGK5JVMfxXeKrchvj_GhYA",
-    authDomain: "cineplay-e690b.firebaseapp.com",
-    databaseURL: "https://cineplay-e690b-default-rtdb.firebaseio.com",
-    projectId: "cineplay-e690b",
-    storageBucket: "cineplay-e690b.firebasestorage.app",
-    messagingSenderId: "840544476635",
-    appId: "1:840544476635:web:6c8c70c17fa0aecda69bfe",
-    measurementId: "G-GCEZ25EQJF"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
-<footer style="text-align: center; padding: 20px;">
-    <a href="politica.html" style="color: #ed1c24;">Política de Privacidade</a>
-</footer>
-<script type="text/javascript">
-    aclib.runAutoTag({
-        zoneId: 'f7sbci0iwf',
-    });
-</script>
-<script type="text/javascript">
-    aclib.runAutoTag({
-        zoneId: 'f7sbci0iwf',
-    });
-</script>
-
 </body>
 </html>
