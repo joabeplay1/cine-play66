@@ -13,17 +13,7 @@
   --text:#f0f0f0;--text-muted:#888;--radius:12px;
 }
 <body>
-    <div id="tela-login" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #141414; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: sans-serif; color: white;">
-    <h1 style="margin-bottom: 20px;">CinePlay</h1>
-    <p>Faça login com o Google para acessar</p>
-    
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <div id="g_id_onload"
-        data-client_id="1052704350848-cq5vcrbfd23o6t2747b2j8i57lpfu2j1.apps.googleusercontent.com"
-         data-callback="finalizarLogin">
-    </div>
-    <div class="g_id_signin" data-type="standard"></div>
-</div>
+  
 
 <script>
   function finalizarLogin(response) {
@@ -935,56 +925,8 @@ if (isLoggedIn()) { renderHome(); } else { renderLogin(); }</script>
     <input type="email" id="email-bar" placeholder="E-mail" style="padding:8px; border-radius:4px; border:none; width:160px; color:#000;">
     <input type="password" id="pass-bar" placeholder="Senha" style="padding:8px; border-radius:4px; border:none; width:160px; color:#000;">
     <button id="btn-entrar-bar" style="background:#e50914; color:#fff; border:none; padding:8px 20px; border-radius:4px; cursor:pointer; font-weight:bold;">ENTRAR</button>
-    <button id="btn-cadastrar-bar" style="background:transparent; color:#fff; border:1px solid #fff; padding:7px 15px; border-radius:4px; cursor:pointer; font-size:12px;">Criar Conta</button>
-  </div>
-
-  <div id="auth-logged-bar" style="display:none; align-items:center; gap:15px;">
-    <span>Olá, <b id="user-display-bar" style="color:#e50914;"></b></span>
-    <button id="btn-sair-bar" style="background:#333; color:#fff; border:none; padding:5px 12px; border-radius:4px; cursor:pointer;">Sair</button>
-  </div>
+    <div id="g_id_onload"
+     data-client_id="1052704350848-cq5vcrbfd23o6t2747b2j8i57lpfu2j1.apps.googleusercontent.com"
+     data-callback="handleCredentialResponse">
 </div>
-
-<script type="module">
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-
-  // AQUI ESTÃO OS DADOS QUE VOCÊ PEGOU NO SITE:
-  const supabaseUrl = 'https://irygjdegwfwecefqcdfi.supabase.co'
-  const supabaseKey = 'sb_publishable_Zy_rQFFsc_vmtseHy7vfQA_g_YhpkLO'
-  const supabase = createClient(supabaseUrl, supabaseKey)
-
-  // Função para Entrar
-  document.getElementById('btn-entrar-bar').onclick = async () => {
-    const email = document.getElementById('email-bar').value
-    const password = document.getElementById('pass-bar').value
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) alert("Erro: " + error.message)
-    else window.location.reload()
-  }
-
-  // Função para Cadastrar
-  document.getElementById('btn-cadastrar-bar').onclick = async () => {
-    const email = document.getElementById('email-bar').value
-    const password = document.getElementById('pass-bar').value
-    const { error } = await supabase.auth.signUp({ email, password })
-    if (error) alert("Erro: " + error.message)
-    else alert("Conta criada! Verifique seu e-mail.")
-  }
-
-  // Função para Sair
-  document.getElementById('btn-sair-bar').onclick = async () => {
-    await supabase.auth.signOut()
-    window.location.reload()
-  }
-
-  // Verificar Login
-  async function check() {
-    const { data: { user } } = await supabase.auth.getUser()
-    if (user) {
-      document.getElementById('auth-inputs-bar').style.display = 'none'
-      document.getElementById('auth-logged-bar').style.display = 'flex'
-      document.getElementById('user-display-bar').innerText = user.email.split('@')[0]
-    }
-  }
-  check()
-</script>
-</html>
+<div class="g_id_signin" data-type="icon" data-shape="circle"></div>
