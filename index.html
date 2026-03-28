@@ -12,7 +12,27 @@
   --primary:#e53e3e;--primary-dark:#c53030;
   --text:#f0f0f0;--text-muted:#888;--radius:12px;
 }
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+<body>
+    <div id="tela-login" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #141414; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: sans-serif; color: white;">
+    <h1 style="margin-bottom: 20px;">CinePlay</h1>
+    <p>Faça login com o Google para acessar</p>
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <div id="g_id_onload"
+        data-client_id="1052704350848-cq5vcrbfd23o6t2747b2j8i57lpfu2j1.apps.googleusercontent.com"
+         data-callback="finalizarLogin">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
+</div>
+
+<script>
+  function finalizarLogin(response) {
+      // Quando o usuário loga, a tela de login some e libera o CinePlay
+      document.getElementById('tela-login').style.display = 'none';
+      console.log("Acesso liberado ao CinePlay");
+  }
+</script>
+    {font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg2);}::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:3px;}
 
 /* LOGIN */
