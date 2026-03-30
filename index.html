@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cine Play - Lateral Chat</title>
+  <title>Cine Play</title>
   <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -12,156 +12,242 @@
   --primary:#e53e3e;--primary-dark:#c53030;
   --text:#f0f0f0;--text-muted:#888;--radius:12px;
 }
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh; overflow-x: hidden;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg2);}::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:3px;}
+
+/* LOGIN */
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+.login-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:40px;width:100%;max-width:400px;text-align:center;}
+.login-logo{width:56px;height:56px;background:var(--primary);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;}
+.login-title{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;margin-bottom:6px;}
+.login-sub{color:var(--text-muted);font-size:14px;margin-bottom:28px;}
+.login-input{width:100%;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;outline:none;margin-bottom:12px;}
+.login-input:focus{border-color:var(--primary);}
+.login-btn{width:100%;padding:13px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;margin-top:4px;}
+.login-btn:hover{background:var(--primary-dark);}
+.login-error{color:#f87171;font-size:13px;margin-top:10px;display:none;}
+.logout-btn{background:var(--bg3);color:var(--text-muted);border:1px solid var(--border);padding:6px 14px;border-radius:999px;font-size:12px;cursor:pointer;transition:all .2s;}
+.logout-btn:hover{color:var(--primary);border-color:var(--primary);}
 
 /* NAVBAR */
 .navbar{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);cursor:pointer;border:none;background:none;}
 .logo-icon{width:36px;height:36px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;}
 .logo-text{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;}
+.search-wrap{flex:1;max-width:420px;position:relative;}
+.search-wrap input{width:100%;padding:8px 16px 8px 40px;background:var(--bg2);border:1px solid var(--border);border-radius:999px;color:var(--text);font-size:14px;outline:none;}
+.search-wrap input:focus{border-color:var(--primary);}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:.5;}
+.navbar-actions{display:flex;gap:8px;}
+.btn-add{background:var(--primary);color:#fff;border:none;padding:8px 18px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .2s;}
+.btn-add:hover{background:var(--primary-dark);}
+.btn-karaoke{background:var(--bg3);color:var(--text);border:1px solid var(--border);padding:8px 14px;border-radius:999px;font-weight:500;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;}
+.btn-karaoke:hover{border-color:var(--primary);color:var(--primary);}
 
-/* LAYOUT LATERAL */
-.content-wrapper {
-  display: flex;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 20px;
-  gap: 20px;
-}
+/* MAIN */
+.main{max-width:1280px;margin:0 auto;padding:24px;}
 
-.video-area {
-  flex: 1; /* Ocupa o espaço que sobrar */
-}
+/* HERO */
+.hero{position:relative;border-radius:var(--radius);overflow:hidden;height:280px;margin-bottom:24px;}
+.hero img{width:100%;height:100%;object-fit:cover;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.85) 0%,rgba(0,0,0,.5) 50%,transparent 100%);}
+.hero-content{position:absolute;bottom:0;left:0;padding:32px;}
+.hero-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--primary);font-weight:700;}
+.hero-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(20px,4vw,36px);font-weight:700;margin-top:6px;}
 
-.sidebar-chat {
-  width: 350px; /* Largura fixa do chat na lateral */
-  position: sticky;
-  top: 84px;
-  height: calc(100vh - 100px);
+/* CATEGORIES */
+.categories{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:16px;}
+.categories::-webkit-scrollbar{height:0;}
+.cat-btn{padding:7px 16px;border-radius:999px;border:none;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.cat-btn.active{background:var(--primary);color:#fff;box-shadow:0 4px 16px rgba(229,62,62,.3);}
+.cat-btn:not(.active){background:var(--bg2);color:var(--text-muted);}
+.cat-btn:not(.active):hover{color:var(--text);background:var(--bg3);}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+.card{background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s;}
+.card:hover{border-color:rgba(229,62,62,.4);transform:translateY(-2px);}
+.card-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;}
+.card-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.card:hover .card-thumb img{transform:scale(1.08);}
+.card-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;}
+.card:hover .card-overlay{opacity:1;}
+.play-btn{width:52px;height:52px;border-radius:50%;background:rgba(229,62,62,.9);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.badge{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.7);color:#fff;font-size:10px;padding:3px 8px;border-radius:6px;}
+.source-badge{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.7);color:#fff;font-size:10px;padding:3px 8px;border-radius:6px;}
+.card-body{padding:12px 14px;}
+.card-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.card-meta{display:flex;gap:10px;margin-top:6px;font-size:11px;color:var(--text-muted);align-items:center;}
+.star{color:#f6c90e;}
+
+/* BATE PAPO ESTILIZADO */
+.chat-section {
+  margin-top: 40px;
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  display: flex;
-  flex-direction: column;
+  overflow: hidden;
 }
-
-/* GRID DE VÍDEOS */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
-.card{background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform .2s;}
-.card:hover{transform:translateY(-4px); border-color: var(--primary);}
-.card-thumb{aspect-ratio:16/9; position: relative;}
-.card-thumb img{width:100%;height:100%;object-fit:cover;}
-.card-body{padding:12px; font-size: 14px; font-weight: 600;}
-
-/* IFRAME DO CHAT */
-.chat-frame {
-  flex: 1;
-  border: none;
-  width: 100%;
-  border-radius: 0 0 var(--radius) var(--radius);
-}
-.chat-header-sidebar {
-  padding: 15px;
+.chat-header {
+  padding: 15px 20px;
   background: var(--bg3);
-  font-weight: bold;
   border-bottom: 1px solid var(--border);
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.chat-header h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
   color: var(--primary);
 }
-
-/* RESPONSIVO (Celular) */
-@media(max-width:900px){
-  .content-wrapper { flex-direction: column; }
-  .sidebar-chat { width: 100%; height: 500px; position: static; }
-  .logo-text { display: none; }
+.chat-frame {
+  width: 100%;
+  height: 500px;
+  border: none;
+  background: white; /* O fundo do chat costuma ser claro */
 }
 
-/* LOGIN */
-.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
-.login-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:40px;width:100%;max-width:400px;text-align:center;}
-.login-input{width:100%;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--text);margin-bottom:12px;outline:none;}
-.login-btn{width:100%;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;}
-</style>
+/* MODAL / PLAYER / ETC ... */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;}
+.modal-bg.hidden{display:none;}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:16px;width:100%;max-width:520px;padding:28px;max-height:90vh;overflow-y:auto;}
+.modal-title{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;margin-bottom:20px;}
+.btn-save{width:100%;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:8px;}
+.btn-save:hover{background:var(--primary-dark);}
+.modal-close{float:right;background:none;border:none;color:var(--text-muted);font-size:22px;cursor:pointer;margin-top:-4px;}
+
+/* PLAYER */
+.topbar{background:rgba(10,10,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;}
+.back-btn{background:none;border:none;color:var(--text-muted);font-size:14px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.back-btn:hover{color:var(--text);}
+.player-main{max-width:1100px;margin:0 auto;padding:24px;}
+.player-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 25px 60px rgba(0,0,0,.6);}
+.player-wrap iframe,.player-wrap video{width:100%;height:100%;border:none;}
+.player-info{margin-top:24px;}
+.player-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(18px,3vw,28px);font-weight:700;}
+
+@media(max-width:600px){
+  .grid{grid-template-columns:repeat(2,1fr);}
+  .hero{height:180px;}
+  .logo-text{display:none;}
+}</style>
 </head>
 <body>
   <div id="app"></div>
-
   <script>
-    const ACCESS_PASSWORD = 'cineplay123';
-    
-    // Dados de exemplo (pode manter os seus aqui)
-    let videos = [
-      { id: 1, title: "SE BEBER NAO CASE 3", url: "https://drive.google.com/file/d/1mGim8GitvsKo7r2k_bO3-ziXsD-eCSs9/preview" },
-      { id: 2, title: "NARUTO VS SASUKE", url: "https://drive.google.com/file/d/1EsRzJ_dnrfbdLzOcu8h0NOKqDpgqNYE3/preview" },
-      { id: 3, title: "ALOK AO VIVO", url: "https://drive.google.com/file/d/1BmudgnWJShrQifYmwl-2qBlZqM01oeAS/preview" }
-    ];
+const ACCESS_PASSWORD = 'cineplay123';
 
-    function isLoggedIn() { return sessionStorage.getItem('cp_auth') === '1'; }
+// Seus vídeos originais
+let videos = [
+  { "id": "1", "title": "SE BEBER NAO CASE 3", "category": "comedia", "source": "google_drive", "video_url": "https://drive.google.com/file/d/1mGim8GitvsKo7r2k_bO3-ziXsD-eCSs9/view", "rating": 9 },
+  { "id": "2", "title": "NARUTO VS SASUKE", "category": "animacao", "source": "google_drive", "video_url": "https://drive.google.com/file/d/1EsRzJ_dnrfbdLzOcu8h0NOKqDpgqNYE3/view", "rating": 10 },
+  { "id": "3", "title": "ALOK AO VIVO", "category": "musica_ao_vivo", "source": "google_drive", "video_url": "https://drive.google.com/file/d/1BmudgnWJShrQifYmwl-2qBlZqM01oeAS/view", "rating": 8 }
+];
 
-    function renderHome() {
-      if (!isLoggedIn()) {
-        document.getElementById('app').innerHTML = `
-          <div class="login-page">
-            <div class="login-box">
-              <h2>🎬 Cine Play</h2><br>
-              <input class="login-input" type="password" id="pass" placeholder="Senha" />
-              <button class="login-btn" onclick="checkLogin()">Entrar</button>
-            </div>
-          </div>`;
-        return;
-      }
+let currentCategory = 'all';
+let currentSearch = '';
 
-      document.getElementById('app').innerHTML = `
-        <nav class="navbar">
-          <div class="logo">
-            <div class="logo-icon">🎬</div><span class="logo-text">Cine Play</span>
-          </div>
-          <button onclick="sessionStorage.clear(); location.reload()" style="background:none; border:1px solid #333; color:#888; padding:5px 10px; border-radius:20px; cursor:pointer;">Sair</button>
-        </nav>
+function isLoggedIn() { return sessionStorage.getItem('cp_auth') === '1'; }
 
-        <div class="content-wrapper">
-          <div class="video-area">
-            <h2 style="margin-bottom:20px;">Filmes e Vídeos</h2>
-            <div class="grid">
-              ${videos.map(v => `
-                <div class="card" onclick="playVideo('${v.url}', '${v.title}')">
-                  <div class="card-thumb">
-                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400" />
-                  </div>
-                  <div class="card-body">${v.title}</div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
+function renderLogin() {
+  document.getElementById('app').innerHTML = `
+    <div class="login-page">
+      <div class="login-box">
+        <div class="login-logo">🎬</div>
+        <div class="login-title">Cine Play</div>
+        <div class="login-sub">Digite a senha para acessar</div>
+        <input class="login-input" type="password" id="loginPass" placeholder="Senha" onkeydown="if(event.key==='Enter')doLogin()" />
+        <button class="login-btn" onclick="doLogin()">Entrar</button>
+        <div class="login-error" id="loginError">Senha incorreta!</div>
+      </div>
+    </div>
+  `;
+}
 
-          <aside class="sidebar-chat">
-            <div class="chat-header-sidebar">💬 Bate-Papo Ao Vivo</div>
-            <iframe class="chat-frame" src="https://joabeplay1.github.io/bate-papo/"></iframe>
-          </aside>
-        </div>
-      `;
-    }
-
-    function checkLogin() {
-      if (document.getElementById('pass').value === ACCESS_PASSWORD) {
-        sessionStorage.setItem('cp_auth', '1');
-        renderHome();
-      } else { alert("Senha errada!"); }
-    }
-
-    function playVideo(url, title) {
-      document.getElementById('app').innerHTML = `
-        <div style="padding:20px;">
-          <button onclick="renderHome()" style="background:none; color:white; border:1px solid #333; padding:10px; cursor:pointer; margin-bottom:20px; border-radius:10px;">← Voltar</button>
-          <div style="aspect-ratio:16/9; background:black; border-radius:15px; overflow:hidden;">
-            <iframe src="${url}" width="100%" height="100%" allow="autoplay" allowfullscreen></iframe>
-          </div>
-          <h1 style="margin-top:20px;">${title}</h1>
-        </div>
-      `;
-    }
-
+function doLogin() {
+  if (document.getElementById('loginPass').value === ACCESS_PASSWORD) {
+    sessionStorage.setItem('cp_auth', '1');
     renderHome();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+function getThumbnail(v) {
+  if (v.thumbnail_url) return v.thumbnail_url;
+  return 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&q=80';
+}
+
+function renderHome() {
+  if (!isLoggedIn()) { renderLogin(); return; }
+  
+  const filtered = videos.filter(v => v.title.toLowerCase().includes(currentSearch.toLowerCase()) && (currentCategory === 'all' || v.category === currentCategory));
+
+  document.getElementById('app').innerHTML = `
+    <nav class="navbar">
+      <div class="logo" onclick="location.reload()">
+        <div class="logo-icon">🎬</div><span class="logo-text">Cine Play</span>
+      </div>
+      <div class="search-wrap">
+        <input type="text" placeholder="Buscar filmes..." oninput="currentSearch=this.value; renderHomeGrid()" />
+      </div>
+      <div class="navbar-actions">
+        <button class="logout-btn" onclick="sessionStorage.clear(); location.reload()">Sair</button>
+      </div>
+    </nav>
+
+    <div class="main">
+      <div class="categories">
+        <button class="cat-btn ${currentCategory==='all'?'active':''}" onclick="currentCategory='all'; renderHome()">🎞 Todos</button>
+        <button class="cat-btn ${currentCategory==='animacao'?'active':''}" onclick="currentCategory='animacao'; renderHome()">✨ Anime</button>
+        <button class="cat-btn ${currentCategory==='comedia'?'active':''}" onclick="currentCategory='comedia'; renderHome()">😂 Comédia</button>
+      </div>
+
+      <div class="grid" id="mainGrid">
+        ${filtered.map(v => `
+          <div class="card" onclick="playVideo('${v.id}')">
+            <div class="card-thumb">
+              <img src="${getThumbnail(v)}" />
+              <div class="card-overlay"><button class="play-btn">▶</button></div>
+            </div>
+            <div class="card-body">
+              <div class="card-title">${v.title}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <section class="chat-section">
+        <div class="chat-header">
+          <span>💬</span>
+          <h3>Bate-Papo Cine Play</h3>
+        </div>
+        <iframe class="chat-frame" src="https://joabeplay1.github.io/bate-papo/"></iframe>
+      </section>
+    </div>
+  `;
+}
+
+function playVideo(id) {
+  const v = videos.find(x => x.id == id);
+  let embedUrl = v.video_url;
+  if(v.source === 'google_drive') embedUrl = v.video_url.replace('/view', '/preview');
+
+  document.getElementById('app').innerHTML = `
+    <div class="topbar"><button class="back-btn" onclick="renderHome()">← Voltar ao Início</button></div>
+    <div class="player-main">
+      <div class="player-wrap">
+        <iframe src="${embedUrl}" allow="autoplay" allowfullscreen></iframe>
+      </div>
+      <div class="player-info">
+        <h1 class="player-title">${v.title}</h1>
+      </div>
+    </div>
+  `;
+}
+
+if (isLoggedIn()) { renderHome(); } else { renderLogin(); }
   </script>
 </body>
 </html>
