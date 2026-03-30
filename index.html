@@ -3,20 +3,194 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cine Play — Oficial</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Cine Play</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --bg:#0a0a0a;--bg2:#111111;--bg3:#1a1a1a;--border:#222;
+      --primary:#e53e3e;--primary-dark:#c53030;
+      --text:#f0f0f0;--text-muted:#888;--radius:12px;
+    }
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+    ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg2);}::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:3px;}
+
+    /* LOGIN */
+    .login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+    .login-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:40px;width:100%;max-width:400px;text-align:center;}
+    .login-logo{width:56px;height:56px;background:var(--primary);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;}
+    .login-title{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;margin-bottom:6px;}
+    .login-sub{color:var(--text-muted);font-size:14px;margin-bottom:28px;}
+    .login-input{width:100%;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;outline:none;margin-bottom:12px;}
+    .login-input:focus{border-color:var(--primary);}
+    .login-btn{width:100%;padding:13px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;margin-top:4px;}
+    .login-btn:hover{background:var(--primary-dark);}
+    .login-error{color:#f87171;font-size:13px;margin-top:10px;display:none;}
+    .logout-btn{background:var(--bg3);color:var(--text-muted);border:1px solid var(--border);padding:6px 14px;border-radius:999px;font-size:12px;cursor:pointer;transition:all .2s;}
+    .logout-btn:hover{color:var(--primary);border-color:var(--primary);}
+
+    /* NAVBAR */
+    .navbar{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);cursor:pointer;border:none;background:none;}
+    .logo-icon{width:36px;height:36px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+    .logo-text{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;}
+    .search-wrap{flex:1;max-width:300px;position:relative;}
+    .search-wrap input{width:100%;padding:8px 16px 8px 40px;background:var(--bg2);border:1px solid var(--border);border-radius:999px;color:var(--text);font-size:14px;outline:none;}
+    .search-wrap input:focus{border-color:var(--primary);}
+    .search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:.5;}
+    .navbar-actions{display:flex;gap:8px;align-items:center;}
+    
+    .btn-nav{background:var(--bg3);color:var(--text);border:1px solid var(--border);padding:8px 14px;border-radius:999px;font-weight:500;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;}
+    .btn-nav:hover{border-color:var(--primary);color:var(--primary);}
+    .btn-add{background:var(--primary);color:#fff;border:none;padding:8px 18px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .2s;}
+    .btn-add:hover{background:var(--primary-dark);}
+
+    /* MAIN & GRID */
+    .main{max-width:1280px;margin:0 auto;padding:24px;}
+    .hero{position:relative;border-radius:var(--radius);overflow:hidden;height:280px;margin-bottom:24px;}
+    .hero img{width:100%;height:100%;object-fit:cover;}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.85) 0%,rgba(0,0,0,.5) 50%,transparent 100%);}
+    .hero-content{position:absolute;bottom:0;left:0;padding:32px;}
+    .hero-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(20px,4vw,36px);font-weight:700;}
+
+    .categories{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:16px;}
+    .cat-btn{padding:7px 16px;border-radius:999px;border:none;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;}
+    .cat-btn.active{background:var(--primary);color:#fff;}
+    .cat-btn:not(.active){background:var(--bg2);color:var(--text-muted);}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+    .card{background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform .2s;}
+    .card-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;}
+    .card-thumb img{width:100%;height:100%;object-fit:cover;}
+    .card-body{padding:12px 14px;}
+    .card-title{font-weight:600;font-size:13px;}
+
+    /* CHAT IFRAME */
+    .chat-container { width:100%; height: calc(100vh - 64px); border:none; background: var(--bg); }
+
+    /* MODAL */
+    .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;}
+    .modal-bg.hidden{display:none;}
+    .modal{background:var(--bg2);border:1px solid var(--border);border-radius:16px;width:100%;max-width:520px;padding:28px;max-height:90vh;overflow-y:auto;}
+    
+    @media(max-width:768px){
+      .logo-text, .btn-nav span { display:none; }
+      .navbar-actions { gap: 4px; }
+    }
+  </style>
 </head>
 <body>
   <div id="app"></div>
 
-  <div id="chatSidebar" class="sidebar">
-    <div class="sidebar-header">
-      <span>💬 Bate-Papo Cine Play</span>
-      <button onclick="toggleChat()" class="close-btn">✕</button>
-    </div>
-    <iframe src="https://joabeplay1.github.io/bate-papo/" frameborder="0"></iframe>
-  </div>
+  <script>
+    const ACCESS_PASSWORD = 'cineplay123';
+    const CHAT_URL = 'https://joabeplay1.github.io/bate-papo/';
 
-  <script type="module" src="script.js"></script>
+    let videos = [
+      { "id": "1", "title": "Interestelar", "category": "filme", "source": "youtube", "video_url": "https://www.youtube.com/watch?v=zSWdZVtXT7E" },
+      { "id": "2", "title": "MADARA RINDO", "category": "animacao", "source": "google_drive", "video_url": "https://drive.google.com/file/d/10jECUzhgdp0pMcoEAGfKFUH8xDTYGziJ/view" }
+      // ... Adicione os outros vídeos aqui se desejar
+    ];
+
+    let currentCategory = 'all';
+    let currentSearch = '';
+
+    function isLoggedIn() { return sessionStorage.getItem('cp_auth') === '1'; }
+
+    // --- RENDERS ---
+
+    function renderNavbar() {
+      return `
+        <nav class="navbar">
+          <button class="logo" onclick="renderHome()">
+            <div class="logo-icon">🎬</div><span class="logo-text">Cine Play</span>
+          </button>
+          <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input id="searchInput" type="text" placeholder="Buscar..." oninput="onSearch(this.value)" />
+          </div>
+          <div class="navbar-actions">
+            <button class="btn-nav" onclick="renderChat()">💬 <span>Bate-papo</span></button>
+            <button class="btn-nav" onclick="renderKaraoke()">🎙️ <span>Karaokê</span></button>
+            <button class="btn-add" onclick="openModal()">+ <span>Novo</span></button>
+            <button class="logout-btn" onclick="doLogout()">Sair</button>
+          </div>
+        </nav>`;
+    }
+
+    function renderHome() {
+      if (!isLoggedIn()) { renderLogin(); return; }
+      const categories = [
+        {key:'all',label:'🎞 Todos'}, {key:'filme',label:'🎬 Filmes'},
+        {key:'animacao',label:'✨ Anime'}, {key:'musica',label:'🎵 Música'}
+      ];
+
+      document.getElementById('app').innerHTML = renderNavbar() + `
+        <div class="main">
+          <div class="categories">
+            ${categories.map(c=>`<button class="cat-btn ${currentCategory===c.key?'active':''}" onclick="setCategory('${c.key}')">${c.label}</button>`).join('')}
+          </div>
+          <div class="grid" id="gridWrap"></div>
+        </div>`;
+      renderGrid();
+    }
+
+    function renderChat() {
+      if (!isLoggedIn()) return;
+      document.getElementById('app').innerHTML = renderNavbar() + `
+        <iframe src="${CHAT_URL}" class="chat-container"></iframe>
+      `;
+    }
+
+    function renderLogin() {
+      document.getElementById('app').innerHTML = `
+        <div class="login-page">
+          <div class="login-box">
+            <div class="login-logo">🎬</div>
+            <div class="login-title">Cine Play</div>
+            <input class="login-input" type="password" id="loginPass" placeholder="Senha de acesso" />
+            <button class="login-btn" onclick="doLogin()">Entrar</button>
+            <div class="login-error" id="loginError">Senha incorreta.</div>
+          </div>
+        </div>`;
+    }
+
+    // --- LOGIC ---
+
+    function doLogin() {
+      if (document.getElementById('loginPass').value === ACCESS_PASSWORD) {
+        sessionStorage.setItem('cp_auth', '1');
+        renderHome();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+      }
+    }
+
+    function doLogout() { sessionStorage.removeItem('cp_auth'); renderLogin(); }
+
+    function setCategory(cat) { currentCategory = cat; renderHome(); }
+    
+    function onSearch(val) { currentSearch = val; renderGrid(); }
+
+    function renderGrid() {
+      const wrap = document.getElementById('gridWrap');
+      if(!wrap) return;
+      const filtered = videos.filter(v => 
+        (currentCategory === 'all' || v.category === currentCategory) &&
+        (v.title.toLowerCase().includes(currentSearch.toLowerCase()))
+      );
+      
+      wrap.innerHTML = filtered.map(v => `
+        <div class="card" onclick="alert('Iniciando player...')">
+          <div class="card-thumb"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400" /></div>
+          <div class="card-body"><div class="card-title">${v.title}</div></div>
+        </div>
+      `).join('');
+    }
+
+    // Inicialização
+    if (isLoggedIn()) renderHome(); else renderLogin();
+  </script>
 </body>
 </html>
