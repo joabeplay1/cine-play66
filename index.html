@@ -3,116 +3,165 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cine Play - Oficial</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+  <title>Cine Play - Lateral Chat</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-    *{margin:0;padding:0;box-sizing:border-box;}
-    :root{
-      --bg:#0a0a0a; --bg2:#111111; --bg3:#1a1a1a; --border:#222;
-      --primary:#e53e3e; --text:#f0f0f0; --text-muted:#888; --radius:12px;
-    }
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0a0a0a;--bg2:#111111;--bg3:#1a1a1a;--border:#222;
+  --primary:#e53e3e;--primary-dark:#c53030;
+  --text:#f0f0f0;--text-muted:#888;--radius:12px;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh; overflow-x: hidden;}
 
-    /* NAVBAR */
-    .navbar{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;}
-    .logo{display:flex;align-items:center;gap:10px;cursor:pointer;}
-    .logo-icon{width:36px;height:36px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;}
-    .search-input{background:var(--bg2);border:1px solid var(--border);padding:8px 15px;border-radius:20px;color:white;width:300px;outline:none;}
+/* NAVBAR */
+.navbar{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);cursor:pointer;border:none;background:none;}
+.logo-icon{width:36px;height:36px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.logo-text{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;}
 
-    /* LAYOUT DUAS COLUNAS */
-    .main-container {
-      display: flex;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 24px;
-      gap: 24px;
-    }
+/* LAYOUT LATERAL */
+.content-wrapper {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  gap: 20px;
+}
 
-    /* ÁREA DE CONTEÚDO (VÍDEOS) */
-    .content-area { flex: 1; }
+.video-area {
+  flex: 1; /* Ocupa o espaço que sobrar */
+}
 
-    .category-bar { display: flex; gap: 10px; margin-bottom: 24px; overflow-x: auto; padding-bottom: 5px; }
-    .cat-tag { background: var(--bg2); padding: 6px 15px; border-radius: 20px; font-size: 13px; cursor: pointer; border: 1px solid var(--border); transition: 0.2s; }
-    .cat-tag.active { background: var(--primary); border-color: var(--primary); }
+.sidebar-chat {
+  width: 350px; /* Largura fixa do chat na lateral */
+  position: sticky;
+  top: 84px;
+  height: calc(100vh - 100px);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+}
 
-    .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
-    .movie-card { background: var(--bg2); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; cursor: pointer; transition: 0.3s; }
-    .movie-card:hover { transform: translateY(-5px); border-color: var(--primary); }
-    .thumb { aspect-ratio: 16/9; background: #222; }
-    .thumb img { width: 100%; height: 100%; object-fit: cover; }
-    .movie-info { padding: 12px; font-weight: 600; font-size: 14px; }
+/* GRID DE VÍDEOS */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+.card{background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform .2s;}
+.card:hover{transform:translateY(-4px); border-color: var(--primary);}
+.card-thumb{aspect-ratio:16/9; position: relative;}
+.card-thumb img{width:100%;height:100%;object-fit:cover;}
+.card-body{padding:12px; font-size: 14px; font-weight: 600;}
 
-    /* BARRA LATERAL (CHAT) */
-    .sidebar-chat {
-      width: 360px;
-      height: calc(100vh - 110px);
-      position: sticky;
-      top: 84px;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-    .chat-header {
-      padding: 15px;
-      background: var(--bg3);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: bold;
-    }
-    .chat-header span { color: var(--primary); }
-    .chat-iframe { flex: 1; border: none; width: 100%; }
+/* IFRAME DO CHAT */
+.chat-frame {
+  flex: 1;
+  border: none;
+  width: 100%;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+.chat-header-sidebar {
+  padding: 15px;
+  background: var(--bg3);
+  font-weight: bold;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  color: var(--primary);
+}
 
-    /* RESPONSIVIDADE */
-    @media (max-width: 1000px) {
-      .main-container { flex-direction: column; }
-      .sidebar-chat { width: 100%; height: 500px; position: static; }
-    }
-  </style>
+/* RESPONSIVO (Celular) */
+@media(max-width:900px){
+  .content-wrapper { flex-direction: column; }
+  .sidebar-chat { width: 100%; height: 500px; position: static; }
+  .logo-text { display: none; }
+}
+
+/* LOGIN */
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+.login-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:40px;width:100%;max-width:400px;text-align:center;}
+.login-input{width:100%;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--text);margin-bottom:12px;outline:none;}
+.login-btn{width:100%;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;}
+</style>
 </head>
 <body>
+  <div id="app"></div>
 
-  <nav class="navbar">
-    <div class="logo">
-      <div class="logo-icon">🎬</div>
-      <strong style="font-family:'Space Grotesk'">Cine Play</strong>
-    </div>
-    <input type="text" class="search-input" placeholder="Buscar filmes...">
-    <button onclick="location.reload()" style="background:var(--bg3); color:white; border:none; padding:8px 15px; border-radius:10px; cursor:pointer">Sair</button>
-  </nav>
-
-  <div class="main-container">
+  <script>
+    const ACCESS_PASSWORD = 'cineplay123';
     
-    <main class="content-area">
-      <div class="category-bar">
-        <div class="cat-tag active">Todos</div>
-        <div class="cat-tag">✨ Anime</div>
-        <div class="cat-tag">😂 Comédia</div>
-      </div>
+    // Dados de exemplo (pode manter os seus aqui)
+    let videos = [
+      { id: 1, title: "SE BEBER NAO CASE 3", url: "https://drive.google.com/file/d/1mGim8GitvsKo7r2k_bO3-ziXsD-eCSs9/preview" },
+      { id: 2, title: "NARUTO VS SASUKE", url: "https://drive.google.com/file/d/1EsRzJ_dnrfbdLzOcu8h0NOKqDpgqNYE3/preview" },
+      { id: 3, title: "ALOK AO VIVO", url: "https://drive.google.com/file/d/1BmudgnWJShrQifYmwl-2qBlZqM01oeAS/preview" }
+    ];
 
-      <div class="video-grid">
-        <div class="movie-card">
-          <div class="thumb"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400"></div>
-          <div class="movie-info">NARUTO VS SASUKE</div>
+    function isLoggedIn() { return sessionStorage.getItem('cp_auth') === '1'; }
+
+    function renderHome() {
+      if (!isLoggedIn()) {
+        document.getElementById('app').innerHTML = `
+          <div class="login-page">
+            <div class="login-box">
+              <h2>🎬 Cine Play</h2><br>
+              <input class="login-input" type="password" id="pass" placeholder="Senha" />
+              <button class="login-btn" onclick="checkLogin()">Entrar</button>
+            </div>
+          </div>`;
+        return;
+      }
+
+      document.getElementById('app').innerHTML = `
+        <nav class="navbar">
+          <div class="logo">
+            <div class="logo-icon">🎬</div><span class="logo-text">Cine Play</span>
+          </div>
+          <button onclick="sessionStorage.clear(); location.reload()" style="background:none; border:1px solid #333; color:#888; padding:5px 10px; border-radius:20px; cursor:pointer;">Sair</button>
+        </nav>
+
+        <div class="content-wrapper">
+          <div class="video-area">
+            <h2 style="margin-bottom:20px;">Filmes e Vídeos</h2>
+            <div class="grid">
+              ${videos.map(v => `
+                <div class="card" onclick="playVideo('${v.url}', '${v.title}')">
+                  <div class="card-thumb">
+                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400" />
+                  </div>
+                  <div class="card-body">${v.title}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <aside class="sidebar-chat">
+            <div class="chat-header-sidebar">💬 Bate-Papo Ao Vivo</div>
+            <iframe class="chat-frame" src="https://joabeplay1.github.io/bate-papo/"></iframe>
+          </aside>
         </div>
+      `;
+    }
+
+    function checkLogin() {
+      if (document.getElementById('pass').value === ACCESS_PASSWORD) {
+        sessionStorage.setItem('cp_auth', '1');
+        renderHome();
+      } else { alert("Senha errada!"); }
+    }
+
+    function playVideo(url, title) {
+      document.getElementById('app').innerHTML = `
+        <div style="padding:20px;">
+          <button onclick="renderHome()" style="background:none; color:white; border:1px solid #333; padding:10px; cursor:pointer; margin-bottom:20px; border-radius:10px;">← Voltar</button>
+          <div style="aspect-ratio:16/9; background:black; border-radius:15px; overflow:hidden;">
+            <iframe src="${url}" width="100%" height="100%" allow="autoplay" allowfullscreen></iframe>
+          </div>
+          <h1 style="margin-top:20px;">${title}</h1>
         </div>
-    </main>
+      `;
+    }
 
-    <aside class="sidebar-chat">
-      <div class="chat-header">
-        <span>●</span> Bate-Papo Cine Play
-      </div>
-      <iframe src="https://joabeplay1.github.io/bate-papo/" class="chat-iframe"></iframe>
-    </aside>
-
-  </div>
-
+    renderHome();
+  </script>
 </body>
 </html>
