@@ -149,6 +149,21 @@ const ACCESS_PASSWORD = 'cineplay123';
 
 let videos = [
   {
+    "id": "69ced82f58f9071ea77a1e4e",
+    "title": "jesus",
+    "description": "",
+    "category": "filme",
+    "anime_subcategory": "",
+    "music_subcategory": "",
+    "source": "google_drive",
+    "video_url": "https://drive.google.com/file/d/1xcd4EM2zC7S1cHu9UYNuCldpWkG_wHiM/view?usp=drive_link",
+    "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/a8ef0d865_PixVerse_V56_Image_Text_360P_Jesus_walking_sl.mp4",
+    "year": "",
+    "duration": "",
+    "rating": 0,
+    "is_favorite": false
+  },
+  {
     "id": "69c5579c214cb829970d53f8",
     "title": "SE BEBER NAO CASE 3 KKKKKKKK",
     "description": "IRA MORRER DE RIR",
@@ -754,7 +769,16 @@ function getFiltered() {
   });
 }
 
- renderGrid() {
+function renderHero() {
+  const w = document.getElementById('heroWrap');
+  if (!w) return;
+  const f = getFiltered();
+  if (currentSearch || currentCategory !== 'all' || !f.length) { w.innerHTML=''; return; }
+  const v = f[0];
+  w.innerHTML = `<div class="hero"><img src="${getThumbnail(v)}" /><div class="hero-overlay"></div><div class="hero-content"><div class="hero-label">⭐ Em destaque</div><h2 class="hero-title">${v.title}</h2>${v.description?'<p style="margin-top:8px;font-size:14px;opacity:.75;max-width:500px">'+v.description.substring(0,120)+'...</p>':''}</div></div>`;
+}
+
+function renderGrid() {
   const w = document.getElementById('gridWrap');
   if (!w) return;
   const f = getFiltered();
@@ -777,32 +801,7 @@ function getFiltered() {
       </div>
     </div>
   `).join('') + '</div>';
-}function renderHero() {
-  const w = document.getElementById('heroWrap');
-  if (!w) return;
-  const f = getFiltered();
-  if (currentSearch || currentCategory !== 'all' || !f.length) { w.innerHTML=''; return; }
-  
-  let v = f[0];
-  
-  // Procura na sua lista se tem algum filme com link .mp4 para forçar ele a ser a capa
-  const videoDestaque = videos.find(x => (x.video_url && x.video_url.includes('.mp4')) || (x.thumbnail_url && x.thumbnail_url.includes('.mp4')));
-  if (videoDestaque) {
-    v = videoDestaque;
-  }
-  
-  // Se for imagem, exibe imagem. Se for vídeo MP4, roda automático!
-  let mediaHtml = `<img src="${getThumbnail(v)}" style="width:100%;height:100%;object-fit:cover;" />`;
-  let mp4Link = (v.video_url && v.video_url.includes('.mp4')) ? v.video_url : ((v.thumbnail_url && v.thumbnail_url.includes('.mp4')) ? v.thumbnail_url : null);
-  
-  if (mp4Link) {
-    mediaHtml = `<video src="${mp4Link}" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>`;
-  }
-
-  w.innerHTML = `<div class="hero">${mediaHtml}<div class="hero-overlay"></div><div class="hero-content"><div class="hero-label">⭐ Em destaque</div><h2 class="hero-title">${v.title}</h2>${v.description?'<p style="margin-top:8px;font-size:14px;opacity:.75;max-width:500px">'+v.description.substring(0,120)+'...</p>':''}</div></div>`;
 }
-
-function renderGrid() {
 
 // ── KARAOKE ───────────────────────────────────────────────────────────────────
 function renderKaraoke() {
@@ -923,13 +922,5 @@ function saveVideo() {
 
 // ── START ─────────────────────────────────────────────────────────────────────
 if (isLoggedIn()) { renderHome(); } else { renderLogin(); }</script>
-window.addEventListener('load', function() {
-    const video = document.querySelector('.video-background');
-    if (video) {
-        video.play().catch(error => {
-            console.log("O autoplay foi bloqueado pelo navegador, mas o vídeo está pronto.");
-        });
-    }
-});
 </body>
 </html>
