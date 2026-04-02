@@ -923,5 +923,13 @@ function saveVideo() {
 
 // ── START ─────────────────────────────────────────────────────────────────────
 if (isLoggedIn()) { renderHome(); } else { renderLogin(); }</script>
+window.addEventListener('load', function() {
+    const video = document.querySelector('.video-background');
+    if (video) {
+        video.play().catch(error => {
+            console.log("O autoplay foi bloqueado pelo navegador, mas o vídeo está pronto.");
+        });
+    }
+});
 </body>
 </html>
