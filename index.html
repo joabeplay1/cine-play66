@@ -58,6 +58,19 @@
     .hero-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--primary);font-weight:700;}
     .hero-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(20px,4vw,36px);font-weight:700;margin-top:6px;}
 
+    /* CATEGORIES */
+    .categories{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:16px;}
+    .categories::-webkit-scrollbar{height:0;}
+    .cat-btn{padding:7px 16px;border-radius:999px;border:none;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+    .cat-btn.active{background:var(--primary);color:#fff;box-shadow:0 4px 16px rgba(229,62,62,.3);}
+    .cat-btn:not(.active){background:var(--bg2);color:var(--text-muted);}
+    .cat-btn:not(.active):hover{color:var(--text);background:var(--bg3);}
+    .anime-subs{display:flex;gap:6px;padding:0 0 12px 12px;flex-wrap:wrap;}
+    .anime-sub-btn{padding:5px 14px;border-radius:999px;border:none;font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;}
+    .anime-sub-btn.active{background:rgba(229,62,62,.8);color:#fff;}
+    .anime-sub-btn:not(.active){background:var(--bg3);color:var(--text-muted);}
+    .anime-sub-btn:not(.active):hover{color:var(--text);}
+
     /* GRID */
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
     .card{background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s;}
@@ -75,6 +88,33 @@
     .card-meta{display:flex;gap:10px;margin-top:6px;font-size:11px;color:var(--text-muted);align-items:center;}
     .star{color:#f6c90e;}
 
+    /* EMPTY */
+    .empty{text-align:center;padding:80px 20px;color:var(--text-muted);}
+
+    /* MODAL */
+    .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;}
+    .modal-bg.hidden{display:none;}
+    .modal{background:var(--bg2);border:1px solid var(--border);border-radius:16px;width:100%;max-width:520px;padding:28px;max-height:90vh;overflow-y:auto;}
+    .modal-title{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;margin-bottom:20px;}
+    .tabs{display:flex;gap:4px;background:var(--bg3);padding:4px;border-radius:10px;margin-bottom:20px;}
+    .tab-btn{flex:1;padding:8px;background:none;border:none;color:var(--text-muted);border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;}
+    .tab-btn.active{background:var(--primary);color:#fff;}
+    .form-group{margin-bottom:14px;}
+    .form-label{display:block;font-size:12px;color:var(--text-muted);margin-bottom:6px;}
+    .form-input{width:100%;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;outline:none;}
+    .form-input:focus{border-color:var(--primary);}
+    .form-textarea{resize:none;height:80px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .form-select{width:100%;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;outline:none;}
+    .btn-save{width:100%;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:8px;}
+    .btn-save:hover{background:var(--primary-dark);}
+    .modal-close{float:right;background:none;border:none;color:var(--text-muted);font-size:22px;cursor:pointer;margin-top:-4px;}
+    .thumb-upload{border:2px dashed var(--border);border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;}
+    .thumb-upload:hover{border-color:var(--primary);background:rgba(229,62,62,.05);}
+    .thumb-preview{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:16/9;}
+    .thumb-preview img{width:100%;height:100%;object-fit:cover;}
+    .thumb-clear{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.7);border:none;border-radius:50%;width:26px;height:26px;color:#fff;cursor:pointer;font-size:16px;}
+
     /* PLAYER */
     .topbar{background:rgba(10,10,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;}
     .back-btn{background:none;border:none;color:var(--text-muted);font-size:14px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:color .2s;}
@@ -82,11 +122,26 @@
     .player-main{max-width:1100px;margin:0 auto;padding:24px;}
     .player-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 25px 60px rgba(0,0,0,.6);}
     .player-wrap iframe,.player-wrap video{width:100%;height:100%;border:none;}
+    .player-info{margin-top:24px;}
+    .player-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(18px,3vw,28px);font-weight:700;}
+    .player-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:13px;color:var(--text-muted);align-items:center;}
+    .player-desc{margin-top:16px;color:var(--text-muted);line-height:1.7;max-width:800px;}
+    .pill{background:var(--bg3);padding:3px 12px;border-radius:999px;font-size:12px;}
+
+    /* KARAOKE PAGE */
+    .karaoke-header{background:rgba(10,10,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;}
+    .karaoke-title{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;}
+    .karaoke-icon{background:rgba(229,62,62,.2);border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;}
+    .karaoke-search-wrap{flex:1;max-width:500px;position:relative;}
+    .karaoke-search-wrap input{width:100%;padding:8px 16px 8px 40px;background:var(--bg2);border:1px solid var(--border);border-radius:999px;color:var(--text);font-size:14px;outline:none;}
+    .karaoke-search-wrap input:focus{border-color:var(--primary);}
 
     @media(max-width:600px){
       .grid{grid-template-columns:repeat(2,1fr);}
       .hero{height:180px;}
       .logo-text{display:none;}
+      .form-row{grid-template-columns:1fr;}
+      .karaoke-header{gap:8px;}
     }
   </style>
 </head>
@@ -97,24 +152,67 @@
 
     let videos = [
       {
-        "id": "69cea7082d454367ad86f059",
-        "title": "Cine Play Apresenta",
+        "id": "69ceaad2bbdc1358f5e12a9c",
+        "title": "jesus maravilha",
+        "description": "",
+        "category": "filme",
+        "anime_subcategory": "",
+        "music_subcategory": "",
         "source": "google_drive",
-        "video_url": "https://drive.google.com/file/d/1QDt5mJ49dtv7sX833nPQN1IGR8xHBSLJ/view",
-        "thumbnail_url": "",
-        "category": "outro",
+        "video_url": "https://drive.google.com/file/d/16NuCHOmSrfANSMqts5xDZm4rueTLfUAQ/view?usp=drive_link",
+        "thumbnail_url": "https://drive.google.com/file/d/16NuCHOmSrfANSMqts5xDZm4rueTLfUAQ/view?usp=drive_link",
+        "year": "",
+        "duration": "",
+        "rating": 0,
         "is_favorite": false
       },
       {
         "id": "69ce9cd72a4a7666617fb6fb",
-        "title": "Jesus",
-        "source": "google_drive",
-        "video_url": "https://drive.google.com/file/d/1YVqJ5xcgs-V5xQoF1BFTGcAEKMgNPh2u/view",
-        "thumbnail_url": "",
+        "title": "jesus",
+        "description": "",
         "category": "filme",
+        "anime_subcategory": "",
+        "music_subcategory": "",
+        "source": "google_drive",
+        "video_url": "https://drive.google.com/file/d/1YVqJ5xcgs-V5xQoF1BFTGcAEKMgNPh2u/view?usp=drive_link",
+        "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/c801db49b_PixVerse_V56_Image_Text_360P_Jesus_walking_sl.mp4",
+        "year": "",
+        "duration": "",
+        "rating": 0,
         "is_favorite": true
+      },
+      {
+        "id": "69c5579c214cb829970d53f8",
+        "title": "SE BEBER NAO CASE 3 KKKKKKKK",
+        "description": "IRA MORRER DE RIR",
+        "category": "comedia",
+        "anime_subcategory": "",
+        "music_subcategory": "",
+        "source": "google_drive",
+        "video_url": "https://drive.google.com/file/d/1mGim8GitvsKo7r2k_bO3-ziXsD-eCSs9/view?usp=drive_link",
+        "thumbnail_url": "",
+        "year": "",
+        "duration": "",
+        "rating": 0,
+        "is_favorite": false
       }
+      /* Os demais vídeos continuam aqui... */
     ];
+
+    let currentPage = 'home';
+    let currentCategory = 'all';
+    let currentAnimeSubcat = '';
+    let currentMusicSubcat = '';
+    let currentSearch = '';
+    let currentKaraokeSearch = '';
+    let nextId = videos.length + 1;
+    let currentThumbFile = null;
+
+    const catLabels = {
+      filme:'Filme', serie:'Série', documentario:'Documentário', animacao:'Anime',
+      musica:'Música', comedia:'Comédia', acao:'Ação', musica_ao_vivo:'Ao Vivo',
+      videos_engracados:'Engraçado', karaoke:'Karaokê', outro:'Outro'
+    };
 
     function isLoggedIn() { return sessionStorage.getItem('cp_auth') === '1'; }
 
@@ -125,49 +223,64 @@
             <div class="login-logo">🎬</div>
             <div class="login-title">Cine Play</div>
             <div class="login-sub">Digite a senha para acessar</div>
-            <input class="login-input" type="password" id="loginPass" placeholder="Senha" />
+            <input class="login-input" type="password" id="loginPass" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')doLogin()" />
             <button class="login-btn" onclick="doLogin()">Entrar</button>
+            <div class="login-error" id="loginError">Senha incorreta. Tente novamente.</div>
           </div>
-        </div>`;
+        </div>
+      `;
+      setTimeout(() => document.getElementById('loginPass')?.focus(), 100);
     }
 
     function doLogin() {
-      if (document.getElementById('loginPass').value === ACCESS_PASSWORD) {
+      const val = document.getElementById('loginPass')?.value;
+      if (val === ACCESS_PASSWORD) {
         sessionStorage.setItem('cp_auth', '1');
         renderHome();
+      } else {
+        const err = document.getElementById('loginError');
+        if (err) { err.style.display = 'block'; }
       }
     }
 
     function renderHome() {
       if (!isLoggedIn()) { renderLogin(); return; }
+      currentPage = 'home';
       document.getElementById('app').innerHTML = `
         <nav class="navbar">
-          <div class="logo">🎬 Cine Play</div>
-          <button class="logout-btn" onclick="sessionStorage.clear(); location.reload();">Sair</button>
+          <button class="logo" onclick="renderHome()">
+            <div class="logo-icon">🎬</div><span class="logo-text">Cine Play</span>
+          </button>
+          <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input id="searchInput" type="text" placeholder="Buscar..." value="${currentSearch}" oninput="onSearch(this.value)" />
+          </div>
+          <div class="navbar-actions">
+            <button class="btn-karaoke" onclick="renderKaraoke()">🎙 Karaokê</button>
+            <button class="btn-add" onclick="openModal()">+ Adicionar</button>
+            <button class="logout-btn" onclick="sessionStorage.clear(); location.reload();">Sair</button>
+          </div>
         </nav>
         <div class="main">
-          <div class="grid" id="grid"></div>
-        </div>`;
+          <div id="gridWrap"></div>
+        </div>
+      `;
       renderGrid();
     }
 
-    function getYTId(url) {
-      const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?\s]+)/);
-      return m ? m[1] : null;
-    }
-
     function renderGrid() {
-      const w = document.getElementById('grid');
-      w.innerHTML = videos.map(v => `
+      const w = document.getElementById('gridWrap');
+      if (!w) return;
+      w.innerHTML = '<div class="grid">' + videos.map(v => `
         <div class="card" onclick="playVideo('${v.id}')">
           <div class="card-thumb">
-            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600" />
+            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&q=80" />
             <div class="card-overlay"><button class="play-btn">▶</button></div>
           </div>
           <div class="card-body">
             <div class="card-title">${v.title}</div>
           </div>
-        </div>`).join('');
+        </div>`).join('') + '</div>';
     }
 
     function playVideo(id) {
@@ -180,11 +293,10 @@
       document.getElementById('app').innerHTML = `
         <div class="topbar"><button class="back-btn" onclick="renderHome()">← Voltar</button></div>
         <div class="player-main">
-          <div class="player-wrap">
-            <iframe src="${embedUrl}" allow="autoplay" allowfullscreen></iframe>
-          </div>
-          <h1 class="player-title" style="margin-top:20px">${v.title}</h1>
-        </div>`;
+          <div class="player-wrap"><iframe src="${embedUrl}" allowfullscreen></iframe></div>
+          <h1 style="margin-top:20px">${v.title}</h1>
+        </div>
+      `;
     }
 
     if (isLoggedIn()) { renderHome(); } else { renderLogin(); }
