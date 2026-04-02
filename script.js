@@ -149,36 +149,6 @@ const ACCESS_PASSWORD = 'cineplay123';
 
 let videos = [
   {
-    "id": "69ceaad2bbdc1358f5e12a9c",
-    "title": "jesus maravilha",
-    "description": "",
-    "category": "filme",
-    "anime_subcategory": "",
-    "music_subcategory": "",
-    "source": "google_drive",
-    "video_url": "https://drive.google.com/file/d/16NuCHOmSrfANSMqts5xDZm4rueTLfUAQ/view?usp=drive_link",
-    "thumbnail_url": "https://drive.google.com/file/d/16NuCHOmSrfANSMqts5xDZm4rueTLfUAQ/view?usp=drive_link",
-    "year": "",
-    "duration": "",
-    "rating": 0,
-    "is_favorite": false
-  },
-  {
-    "id": "69ce9cd72a4a7666617fb6fb",
-    "title": "jesus",
-    "description": "",
-    "category": "filme",
-    "anime_subcategory": "",
-    "music_subcategory": "",
-    "source": "google_drive",
-    "video_url": "https://drive.google.com/file/d/1YVqJ5xcgs-V5xQoF1BFTGcAEKMgNPh2u/view?usp=drive_link",
-    "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/c801db49b_PixVerse_V56_Image_Text_360P_Jesus_walking_sl.mp4",
-    "year": "",
-    "duration": "",
-    "rating": 0,
-    "is_favorite": true
-  },
-  {
     "id": "69c5579c214cb829970d53f8",
     "title": "SE BEBER NAO CASE 3 KKKKKKKK",
     "description": "IRA MORRER DE RIR",
@@ -784,26 +754,7 @@ function getFiltered() {
   });
 }
 
-function renderHero() {
-  const w = document.getElementById('heroWrap');
-  if (!w || !videos.length) return;
-  
-  // Pega o primeiro vídeo da sua lista (que tem o link direto)
-  const v = videos[0]; 
-
-  w.innerHTML = `
-    <div class="hero">
-      <video src="${v.video_url}" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <div class="hero-label">⭐ Em destaque</div>
-        <h2 class="hero-title">${v.title}</h2>
-        ${v.description ? '<p style="margin-top:8px;font-size:14px;opacity:.75;max-width:500px">'+v.description.substring(0,120)+'...</p>' : ''}
-      </div>
-    </div>`;
-}
-
-function renderGrid() {
+ renderGrid() {
   const w = document.getElementById('gridWrap');
   if (!w) return;
   const f = getFiltered();
@@ -826,7 +777,32 @@ function renderGrid() {
       </div>
     </div>
   `).join('') + '</div>';
+}function renderHero() {
+  const w = document.getElementById('heroWrap');
+  if (!w) return;
+  const f = getFiltered();
+  if (currentSearch || currentCategory !== 'all' || !f.length) { w.innerHTML=''; return; }
+  
+  let v = f[0];
+  
+  // Procura na sua lista se tem algum filme com link .mp4 para forçar ele a ser a capa
+  const videoDestaque = videos.find(x => (x.video_url && x.video_url.includes('.mp4')) || (x.thumbnail_url && x.thumbnail_url.includes('.mp4')));
+  if (videoDestaque) {
+    v = videoDestaque;
+  }
+  
+  // Se for imagem, exibe imagem. Se for vídeo MP4, roda automático!
+  let mediaHtml = `<img src="${getThumbnail(v)}" style="width:100%;height:100%;object-fit:cover;" />`;
+  let mp4Link = (v.video_url && v.video_url.includes('.mp4')) ? v.video_url : ((v.thumbnail_url && v.thumbnail_url.includes('.mp4')) ? v.thumbnail_url : null);
+  
+  if (mp4Link) {
+    mediaHtml = `<video src="${mp4Link}" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>`;
+  }
+
+  w.innerHTML = `<div class="hero">${mediaHtml}<div class="hero-overlay"></div><div class="hero-content"><div class="hero-label">⭐ Em destaque</div><h2 class="hero-title">${v.title}</h2>${v.description?'<p style="margin-top:8px;font-size:14px;opacity:.75;max-width:500px">'+v.description.substring(0,120)+'...</p>':''}</div></div>`;
 }
+
+function renderGrid() {
 
 // ── KARAOKE ───────────────────────────────────────────────────────────────────
 function renderKaraoke() {
