@@ -149,6 +149,21 @@ const ACCESS_PASSWORD = 'cineplay123';
 
 let videos = [
   {
+    "id": "69cea7082d454367ad86f059",
+    "title": "cineplay apresnta ",
+    "description": "",
+    "category": "outro",
+    "anime_subcategory": "",
+    "music_subcategory": "",
+    "source": "google_drive",
+    "video_url": "https://drive.google.com/file/d/1QDt5mJ49dtv7sX833nPQN1IGR8xHBSLJ/view?usp=drive_link",
+    "thumbnail_url": "https://drive.google.com/file/d/1QDt5mJ49dtv7sX833nPQN1IGR8xHBSLJ/view?usp=drive_link",
+    "year": "",
+    "duration": "",
+    "rating": 0,
+    "is_favorite": false
+  },
+  {
     "id": "69ce9cd72a4a7666617fb6fb",
     "title": "jesus",
     "description": "",
@@ -161,7 +176,7 @@ let videos = [
     "year": "",
     "duration": "",
     "rating": 0,
-    "is_favorite": false
+    "is_favorite": true
   },
   {
     "id": "69c8a8d09f2fd9e9bc05257d",
@@ -176,7 +191,7 @@ let videos = [
     "year": "",
     "duration": "",
     "rating": 0,
-    "is_favorite": false
+    "is_favorite": true
   },
   {
     "id": "69c8a89d51074e88bed4d2e3",
