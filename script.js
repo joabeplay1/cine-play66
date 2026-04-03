@@ -73,8 +73,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .card{background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s;}
 .card:hover{border-color:rgba(229,62,62,.4);transform:translateY(-2px);}
 .card-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;}
-.card-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
-.card:hover .card-thumb img{transform:scale(1.08);}
+.card-thumb img,.card-thumb video{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.card-thumb iframe{width:100%;height:100%;border:none;pointer-events:none;}
+.card:hover .card-thumb img,.card:hover .card-thumb video{transform:scale(1.08);}
 .card-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;}
 .card:hover .card-overlay{opacity:1;}
 .play-btn{width:52px;height:52px;border-radius:50%;background:rgba(229,62,62,.9);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;}
@@ -881,12 +882,30 @@ function doLogout() {
 }
 
 function getThumbnail(v) {
-  if (v.thumbnail_url) return v.thumbnail_url;
+  if (v.thumbnail_url && !isVideoThumb(v.thumbnail_url)) return v.thumbnail_url;
   if (v.source === 'youtube') {
     const m = v.video_url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?\s]+)/);
     if (m) return 'https://img.youtube.com/vi/' + m[1] + '/hqdefault.jpg';
   }
   return 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&q=80';
+}
+function isVideoThumb(url) {
+  if (!url) return false;
+  return /\.(mp4|mov|webm|avi|mkv)(\?|$)/i.test(url) || url.includes('drive.google.com');
+}
+function getDriveEmbedUrl(url) {
+  const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  return m ? 'https://drive.google.com/file/d/' + m[1] + '/preview?autoplay=1&mute=1' : url;
+}
+function getThumbHtml(v) {
+  const t = v.thumbnail_url;
+  if (!t || !isVideoThumb(t)) {
+    return '<img src="' + getThumbnail(v) + '" alt="' + v.title + '" loading="lazy" style="width:100%;height:100%;object-fit:cover" />';
+  }
+  if (t.includes('drive.google.com')) {
+    return '<iframe src="' + getDriveEmbedUrl(t) + '" style="width:100%;height:100%;border:none;pointer-events:none" allow="autoplay" title="' + v.title + '"></iframe>';
+  }
+  return '<video src="' + t + '" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"></video>';
 }
 function getYTId(url) {
   const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?\s]+)/);
@@ -1120,7 +1139,8 @@ function renderHero() {
   const f = getFiltered();
   if (currentSearch || currentCategory !== 'all' || !f.length) { w.innerHTML=''; return; }
   const v = f[0];
-  w.innerHTML = `<div class="hero"><img src="${getThumbnail(v)}" /><div class="hero-overlay"></div><div class="hero-content"><div class="hero-label">⭐ Em destaque</div><h2 class="hero-title">${v.title}</h2>${v.description?'<p style="margin-top:8px;font-size:14px;opacity:.75;max-width:500px">'+v.description.substring(0,120)+'...</p>':''}</div></div>`;
+  const heroMedia = isVideoThumb(v.thumbnail_url) ? getThumbHtml(v) : '<img src="' + getThumbnail(v) + '" style="width:100%;height:100%;object-fit:cover" />';
+  w.innerHTML = `<div class="hero">${heroMedia}<div class="hero-overlay"></div><div class="hero-content"><div class="hero-label">⭐ Em destaque</div><h2 class="hero-title">${v.title}</h2>${v.description?'<p style="margin-top:8px;font-size:14px;opacity:.75;max-width:500px">'+v.description.substring(0,120)+'...</p>':''}</div></div>`;
 }
 
 function renderGrid() {
@@ -1131,7 +1151,7 @@ function renderGrid() {
   w.innerHTML = '<div class="grid">' + f.map(v=>`
     <div class="card" onclick="playVideo('${v.id}')">
       <div class="card-thumb">
-        <img src="${getThumbnail(v)}" alt="${v.title}" loading="lazy" />
+        ${getThumbHtml(v)}
         <div class="card-overlay"><button class="play-btn">▶</button></div>
         <span class="badge">${catLabels[v.category]||v.category}${v.anime_subcategory?(' · '+(animeSubLabels[v.anime_subcategory]||''))  :''}</span>
         <span class="source-badge">${v.source==='youtube'?'YouTube':v.source==='google_drive'?'Drive':'URL'}</span>
@@ -1180,7 +1200,7 @@ function renderKaraokeGrid() {
   w.innerHTML = '<div class="grid">' + list.map(v=>`
     <div class="card" onclick="playVideo('${v.id}')">
       <div class="card-thumb">
-        <img src="${getThumbnail(v)}" alt="${v.title}" loading="lazy" />
+        ${getThumbHtml(v)}
         <div class="card-overlay"><button class="play-btn">▶</button></div>
         <span class="badge">🎙 Karaokê</span>
       </div>
