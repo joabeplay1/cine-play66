@@ -43,6 +43,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .btn-add:hover{background:var(--primary-dark);}
 .btn-karaoke{background:var(--bg3);color:var(--text);border:1px solid var(--border);padding:8px 14px;border-radius:999px;font-weight:500;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;}
 .btn-karaoke:hover{border-color:var(--primary);color:var(--primary);}
+.btn-chat{background:var(--bg3);color:var(--text);border:1px solid var(--border);padding:8px 14px;border-radius:999px;font-weight:500;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;text-decoration:none;}
+.btn-chat:hover{border-color:#4ade80;color:#4ade80;}
+.card-actions{display:flex;gap:6px;margin-top:6px;}
+.btn-edit{background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;transition:all .2s;flex:1;}
+.btn-edit:hover{border-color:var(--primary);color:var(--primary);}
+.btn-delete{background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;transition:all .2s;flex:1;}
+.btn-delete:hover{border-color:#ef4444;color:#ef4444;}
+.btn-delete.confirm{background:#ef4444;color:#fff;border-color:#ef4444;}
 
 /* MAIN */
 .main{max-width:1280px;margin:0 auto;padding:24px;}
@@ -149,6 +157,21 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 const ACCESS_PASSWORD = 'cineplay123';
 
 let videos = [
+  {
+    "id": "69cfb897a552a06039f9e5cd",
+    "title": "kkkkkk",
+    "description": "",
+    "category": "videos_engracados",
+    "anime_subcategory": "",
+    "music_subcategory": "",
+    "source": "google_drive",
+    "video_url": "https://drive.google.com/file/d/1xcd4EM2zC7S1cHu9UYNuCldpWkG_wHiM/view?usp=drive_link",
+    "thumbnail_url": "https://drive.google.com/file/d/1xcd4EM2zC7S1cHu9UYNuCldpWkG_wHiM/view?usp=drive_link",
+    "year": "",
+    "duration": "",
+    "rating": 0,
+    "is_favorite": false
+  },
   {
     "id": "69cf1d8a996c2ac213eba74d",
     "title": " Bom Samaritano ( PLAYBACK LEGENDADO ) Anderson Freire",
@@ -833,6 +856,7 @@ let currentSearch = '';
 let currentKaraokeSearch = '';
 let nextId = videos.length + 1;
 let currentThumbFile = null;
+let editingId = null;
 
 const catLabels = {
   filme:'Filme', serie:'Série', documentario:'Documentário', animacao:'Anime',
@@ -939,6 +963,8 @@ function renderHome() {
         <input id="searchInput" type="text" placeholder="Buscar..." value="${currentSearch}" oninput="onSearch(this.value)" />
       </div>
       <div class="navbar-actions">
+        <a class="btn-chat" href="https://joabeplay1.github.io/bate-papo/" target="_blank">💬 Bate-Papo</a>
+        <a class="btn-chat" href="https://joabeplay1.github.io/dama-brasileira-55/" target="_blank">🎮 Dama</a>
         <button class="btn-karaoke" onclick="renderKaraoke()">🎙 Karaokê</button>
         <button class="btn-add" onclick="openModal()">+ Adicionar</button>
         <button class="logout-btn" onclick="doLogout()">Sair</button>
@@ -955,7 +981,8 @@ function renderHome() {
     <div class="modal-bg hidden" id="modalBg">
       <div class="modal">
         <button class="modal-close" onclick="closeModal()">✕</button>
-        <div class="modal-title">Adicionar Vídeo</div>
+        <div class="modal-title" id="modal-add-title">Adicionar Vídeo</div>
+        <div class="modal-title" id="modal-edit-title" style="display:none">✏️ Editar Vídeo</div>
         <div class="tabs">
           <button class="tab-btn active" id="tabYt" onclick="selectTab('youtube')">▶ YouTube</button>
           <button class="tab-btn" id="tabDrive" onclick="selectTab('google_drive')">◆ Drive</button>
@@ -1031,7 +1058,7 @@ function renderHome() {
             <input class="form-input" id="videoThumb" placeholder="Ou cole uma URL de imagem..." style="margin-top:8px" />
           </div>
         </div>
-        <button class="btn-save" onclick="saveVideo()">+ Adicionar Vídeo</button>
+        <button class="btn-save" id="btnSave" onclick="saveVideo()">+ Adicionar Vídeo</button>
       </div>
     </div>
   `;
@@ -1149,23 +1176,64 @@ function renderGrid() {
   const f = getFiltered();
   if (!f.length) { w.innerHTML='<div class="empty"><div style="font-size:64px;opacity:.3;margin-bottom:16px">🎬</div><p style="font-size:18px;font-weight:600">Nenhum vídeo encontrado</p></div>'; return; }
   w.innerHTML = '<div class="grid">' + f.map(v=>`
-    <div class="card" onclick="playVideo('${v.id}')">
-      <div class="card-thumb">
+    <div class="card">
+      <div class="card-thumb" onclick="playVideo('${v.id}')" style="cursor:pointer">
         ${getThumbHtml(v)}
         <div class="card-overlay"><button class="play-btn">▶</button></div>
         <span class="badge">${catLabels[v.category]||v.category}${v.anime_subcategory?(' · '+(animeSubLabels[v.anime_subcategory]||''))  :''}</span>
         <span class="source-badge">${v.source==='youtube'?'YouTube':v.source==='google_drive'?'Drive':'URL'}</span>
       </div>
       <div class="card-body">
-        <div class="card-title">${v.title}</div>
+        <div class="card-title" onclick="playVideo('${v.id}')" style="cursor:pointer">${v.title}</div>
         <div class="card-meta">
           ${v.year?'<span>'+v.year+'</span>':''}
           ${v.duration?'<span>⏱ '+v.duration+'</span>':''}
           ${v.rating?'<span class="star">★ '+v.rating+'</span>':''}
         </div>
+        <div class="card-actions">
+          <button class="btn-edit" onclick="openEditModal('${v.id}')">✏️ Editar</button>
+          <button class="btn-delete" id="delbtn_${v.id}" onclick="confirmDelete('${v.id}')">🗑 Excluir</button>
+        </div>
       </div>
     </div>
   `).join('') + '</div>';
+}
+
+function confirmDelete(id) {
+  const btn = document.getElementById('delbtn_' + id);
+  if (!btn) return;
+  if (btn.dataset.confirm === '1') {
+    videos = videos.filter(v => v.id != id);
+    renderHero(); renderGrid();
+  } else {
+    btn.dataset.confirm = '1';
+    btn.textContent = '⚠️ Confirmar?';
+    btn.classList.add('confirm');
+    setTimeout(() => { if (btn) { btn.dataset.confirm=''; btn.textContent='🗑 Excluir'; btn.classList.remove('confirm'); } }, 3000);
+  }
+}
+
+function openEditModal(id) {
+  const v = videos.find(x => x.id == id);
+  if (!v) return;
+  editingId = id;
+  document.getElementById('modalBg').classList.remove('hidden');
+  document.getElementById('modal-edit-title').style.display = 'block';
+  document.getElementById('modal-add-title').style.display = 'none';
+  document.getElementById('videoUrl').value = v.video_url || '';
+  document.getElementById('videoTitle').value = v.title || '';
+  document.getElementById('videoDesc').value = v.description || '';
+  document.getElementById('videoCat').value = v.category || 'filme';
+  document.getElementById('videoYear').value = v.year || '';
+  document.getElementById('videoDur').value = v.duration || '';
+  document.getElementById('videoRating').value = v.rating || '';
+  document.getElementById('videoThumb').value = v.thumbnail_url || '';
+  document.getElementById('btnSave').textContent = '💾 Salvar Alterações';
+  onCatChange(v.category || 'filme');
+  if (v.anime_subcategory) document.getElementById('animeSubcat').value = v.anime_subcategory;
+  if (v.music_subcategory) document.getElementById('musicSubcat').value = v.music_subcategory;
+  selectTab(v.source || 'youtube');
+  currentThumbFile = null;
 }
 
 // ── KARAOKE ───────────────────────────────────────────────────────────────────
@@ -1198,15 +1266,19 @@ function renderKaraokeGrid() {
   const list = videos.filter(v => v.category === 'karaoke' && (!currentKaraokeSearch || v.title.toLowerCase().includes(currentKaraokeSearch.toLowerCase())));
   if (!list.length) { w.innerHTML = '<div class="empty"><div style="font-size:64px;opacity:.3;margin-bottom:16px">🎙</div><p style="font-size:18px;font-weight:600">' + (currentKaraokeSearch ? 'Nenhuma música encontrada' : 'Nenhuma música de karaokê adicionada') + '</p></div>'; return; }
   w.innerHTML = '<div class="grid">' + list.map(v=>`
-    <div class="card" onclick="playVideo('${v.id}')">
-      <div class="card-thumb">
+    <div class="card">
+      <div class="card-thumb" onclick="playVideo('${v.id}')" style="cursor:pointer">
         ${getThumbHtml(v)}
         <div class="card-overlay"><button class="play-btn">▶</button></div>
         <span class="badge">🎙 Karaokê</span>
       </div>
       <div class="card-body">
-        <div class="card-title">${v.title}</div>
+        <div class="card-title" onclick="playVideo('${v.id}')" style="cursor:pointer">${v.title}</div>
         <div class="card-meta">${v.year?'<span>'+v.year+'</span>':''}</div>
+        <div class="card-actions">
+          <button class="btn-edit" onclick="openEditModal('${v.id}')">✏️ Editar</button>
+          <button class="btn-delete" id="delbtn_${v.id}" onclick="confirmDelete('${v.id}')">🗑 Excluir</button>
+        </div>
       </div>
     </div>
   `).join('') + '</div>';
@@ -1246,8 +1318,14 @@ function playVideo(id) {
 
 // ── MODAL ─────────────────────────────────────────────────────────────────────
 let currentSource = 'youtube';
-function openModal() { document.getElementById('modalBg').classList.remove('hidden'); }
-function closeModal() { document.getElementById('modalBg').classList.add('hidden'); currentThumbFile=null; }
+function openModal() {
+  editingId = null;
+  document.getElementById('modalBg').classList.remove('hidden');
+  document.getElementById('modal-add-title').style.display = 'block';
+  document.getElementById('modal-edit-title').style.display = 'none';
+  document.getElementById('btnSave').textContent = '+ Adicionar Vídeo';
+}
+function closeModal() { document.getElementById('modalBg').classList.add('hidden'); currentThumbFile=null; editingId=null; }
 function selectTab(src) {
   currentSource = src;
   ['youtube','google_drive','url_direta'].forEach(s => {
@@ -1266,20 +1344,37 @@ function saveVideo() {
   const cat = document.getElementById('videoCat').value;
   const animeEl = document.getElementById('animeSubcat');
   const musicEl = document.getElementById('musicSubcat');
-  const video = {
-    id: 'local_'+nextId++, title,
-    description: document.getElementById('videoDesc').value.trim(),
-    category: cat,
-    anime_subcategory: cat==='animacao'&&animeEl?animeEl.value:'',
-    music_subcategory: cat==='musica'&&musicEl?musicEl.value:'',
-    source: currentSource, video_url: url,
-    thumbnail_url: currentThumbFile || document.getElementById('videoThumb')?.value?.trim() || '',
-    year: document.getElementById('videoYear').value.trim(),
-    duration: document.getElementById('videoDur').value.trim(),
-    rating: parseFloat(document.getElementById('videoRating').value)||0,
-    is_favorite: false
-  };
-  videos.unshift(video);
+  const thumbUrl = currentThumbFile || document.getElementById('videoThumb')?.value?.trim() || '';
+  if (editingId !== null) {
+    const idx = videos.findIndex(v => v.id == editingId);
+    if (idx !== -1) {
+      videos[idx] = { ...videos[idx], title,
+        description: document.getElementById('videoDesc').value.trim(),
+        category: cat,
+        anime_subcategory: cat==='animacao'&&animeEl?animeEl.value:'',
+        music_subcategory: cat==='musica'&&musicEl?musicEl.value:'',
+        source: currentSource, video_url: url,
+        thumbnail_url: thumbUrl,
+        year: document.getElementById('videoYear').value.trim(),
+        duration: document.getElementById('videoDur').value.trim(),
+        rating: parseFloat(document.getElementById('videoRating').value)||0,
+      };
+    }
+  } else {
+    videos.unshift({
+      id: 'local_'+nextId++, title,
+      description: document.getElementById('videoDesc').value.trim(),
+      category: cat,
+      anime_subcategory: cat==='animacao'&&animeEl?animeEl.value:'',
+      music_subcategory: cat==='musica'&&musicEl?musicEl.value:'',
+      source: currentSource, video_url: url,
+      thumbnail_url: thumbUrl,
+      year: document.getElementById('videoYear').value.trim(),
+      duration: document.getElementById('videoDur').value.trim(),
+      rating: parseFloat(document.getElementById('videoRating').value)||0,
+      is_favorite: false
+    });
+  }
   currentThumbFile = null;
   closeModal();
   renderHome();
