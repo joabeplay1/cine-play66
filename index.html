@@ -1362,30 +1362,64 @@ function calcPress(val) {
 
 async function corrigirTexto() {
   const input = document.getElementById('corrInput')?.value?.trim();
-  if(!input) return;
+  if (!input) return;
+
   const btn = document.getElementById('btnCorr');
   const out = document.getElementById('corrOutput');
   const langEl = document.getElementById('corrLang');
-  const langMap = {pt:'Português (Brasil)',en:'English',es:'Español',fr:'Français',de:'Deutsch',it:'Italiano',ja:'日本語',ko:'한국어',zh:'中文',ar:'العربية'};
-  const lang = langMap[langEl?.value||'pt']||'Português (Brasil)';
-  if(btn) btn.disabled=true, btn.textContent='⏳ Corrigindo...';
-  if(out) out.value='Corrigindo com IA...';
+  
+  // Mapeamento de idiomas para o prompt
+  const langMap = {
+    pt: 'Português (Brasil)', en: 'English', es: 'Español', 
+    fr: 'Français', de: 'Deutsch', it: 'Italiano', 
+    ja: '日本語', ko: '한국어', zh: '中文', ar: 'العربية'
+  };
+  const lang = langMap[langEl?.value || 'pt'] || 'Português (Brasil)';
+
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = '⏳ Corrigindo...';
+  }
+  if (out) out.value = 'Corrigindo com IA...';
+
   try {
-    const resp = await fetch('https://api.base44.app/api/apps/integrations/invoke', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        integration_type:'Core',
-        endpoint:'InvokeLLM',
-        params:{ prompt:'Corrija o texto abaixo na língua '+lang+'. Corrija erros de ortografia, gramática, pontuação e concordância. Mantenha o sentido original. Retorne APENAS o texto corrigido, sem explicações.\n\nTexto:\n'+input }
+    // 1. Usando a URL do Gemini com a sua chave
+    const apiKey = 'AIzaSyD16h0dRFmM5pzpCw78mnODpUSOX1tTRjQ';
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{
+            text: `Aja como um revisor ortográfico profissional. Corrija o texto abaixo na língua ${lang}. 
+            Corrija erros de ortografia, gramática, pontuação e concordância. Mantenha o sentido original. 
+            Retorne APENAS o texto corrigido, sem nenhuma explicação ou comentário adicional.\n\nTexto:\n${input}`
+          }]
+        }]
       })
     });
+
     const data = await resp.json();
-    if(out) out.value = data.result || data.output || data || 'Erro ao corrigir';
-  } catch(e) {
-    if(out) out.value = 'Erro: não foi possível corrigir. Verifique sua conexão.';
+
+    // 2. Pegando o resultado dentro da estrutura do Gemini
+    if (data.candidates && data.candidates[0].content.parts[0].text) {
+      const textoCorrigido = data.candidates[0].content.parts[0].text;
+      if (out) out.value = textoCorrigido.trim();
+    } else {
+      throw new Error('Resposta inválida da IA');
+    }
+
+  } catch (e) {
+    console.error('Erro na correção:', e);
+    if (out) out.value = 'Erro: não foi possível corrigir. Verifique sua conexão ou a chave da API.';
   }
-  if(btn) btn.disabled=false, btn.textContent='✨ Corrigir';
+
+  if (btn) {
+    btn.disabled = false;
+    btn.textContent = '✨ Corrigir';
+  }
 }
 
 // ── KARAOKE ───────────────────────────────────────────────────────────────────
