@@ -142,6 +142,38 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .karaoke-search-wrap input{width:100%;padding:8px 16px 8px 40px;background:var(--bg2);border:1px solid var(--border);border-radius:999px;color:var(--text);font-size:14px;outline:none;}
 .karaoke-search-wrap input:focus{border-color:var(--primary);}
 
+/* FERRAMENTAS */
+.tools-header{background:rgba(10,10,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;}
+.tools-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;}
+.tools-tabs{display:flex;gap:6px;margin-bottom:24px;}
+.tool-tab{padding:8px 20px;border-radius:999px;border:1px solid var(--border);background:var(--bg2);color:var(--text-muted);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;}
+.tool-tab.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+.tool-section{display:none;}.tool-section.active{display:block;}
+.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.tool-label{font-size:12px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;}
+.tool-textarea{width:100%;height:200px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:14px;padding:12px;outline:none;resize:none;font-family:'Inter',sans-serif;}
+.tool-textarea:focus{border-color:var(--primary);}
+.tool-select{padding:8px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none;cursor:pointer;}
+.tool-select:focus{border-color:var(--primary);}
+.btn-tool{padding:10px 20px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:background .2s;display:flex;align-items:center;gap:8px;}
+.btn-tool:hover{background:var(--primary-dark);}
+.btn-tool:disabled{opacity:.5;cursor:not-allowed;}
+.btn-copy{padding:8px 16px;background:var(--bg3);color:var(--text-muted);border:1px solid var(--border);border-radius:8px;font-size:13px;cursor:pointer;transition:all .2s;}
+.btn-copy:hover{color:var(--text);border-color:var(--primary);}
+.calc-display{background:rgba(0,0,0,.4);border-radius:16px;padding:16px;text-align:right;min-height:80px;display:flex;flex-direction:column;justify-content:flex-end;margin-bottom:16px;}
+.calc-expr{font-size:13px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.calc-result{font-size:32px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.calc-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:320px;margin:0 auto;}
+.calc-btn{height:56px;border-radius:12px;border:none;font-size:18px;font-weight:700;cursor:pointer;transition:all .15s;background:var(--bg2);color:var(--text);}
+.calc-btn:hover{background:var(--bg3);}
+.calc-btn:active{transform:scale(.95);}
+.calc-btn.op{background:rgba(229,62,62,.2);color:var(--primary);}
+.calc-btn.op:hover{background:rgba(229,62,62,.35);}
+.calc-btn.eq{background:var(--primary);color:#fff;box-shadow:0 4px 16px rgba(229,62,62,.3);}
+.calc-btn.eq:hover{background:var(--primary-dark);}
+.calc-btn.cl{background:var(--bg3);color:var(--text-muted);}
+.iframe-wrap{width:100%;height:calc(100vh - 64px);border:none;}
+
 @media(max-width:600px){
   .grid{grid-template-columns:repeat(2,1fr);}
   .hero{height:180px;}
@@ -257,51 +289,6 @@ let videos = [
     "source": "youtube",
     "video_url": "https://youtu.be/5eJwf_k68r8?si=XvTG1aVOH0o-j1LQ",
     "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/4979de327_Gemini_Generated_Image_v5fxl9v5fxl9v5fx.png",
-    "year": "",
-    "duration": "",
-    "rating": 0,
-    "is_favorite": false
-  },
-  {
-    "id": "69cf1a77ea183a8aded33db5",
-    "title": "https://youtu.be/5eJwf_k68r8?si=BRjt_yOyyJGMSkim",
-    "description": "O Convite para o Estrelato 🌟\n\"Já imaginou trocar a poltrona pelo palco? No Cine Play, a estrela da noite é você! Venha viver a emoção de cantar seus sucessos favoritos com som de cinema e uma energia contagiante. Não importa se você é profissional ou cantor de chuveiro: aqui, o que vale é a diversão e a sua voz brilhando na tela grande. Prepare o gogó e venha dar um show!\"\n\nFoco na Conexão e Diversão 🥳\n\"Cantar sozinho é bom, mas no Cine Play é inesquecível! Reunimos os maiores hits de todos os tempos para uma experiência interativa onde ninguém fica parado. Traga seus amigos, escolha sua música e sinta a vibração de um cinema inteiro cantando com você. É mais que um filme, é o seu momento de soltar a voz!\"\n\nCurto e Impactante (Para Redes Sociais) 📱\n\"Luz, câmera... SOLTA O SOM! 🎶 O Cine Play convoca todos os amantes da música para uma noite onde o microfone é o protagonista. Venha cantar, se emocionar e transformar o cinema na sua pista de apresentações.",
-    "category": "karaoke",
-    "anime_subcategory": "",
-    "music_subcategory": "",
-    "source": "youtube",
-    "video_url": "https://youtu.be/5eJwf_k68r8?si=BRjt_yOyyJGMSkim",
-    "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/f3c6960a7_Gemini_Generated_Image_v5fxl9v5fxl9v5fx.png",
-    "year": "",
-    "duration": "",
-    "rating": 0,
-    "is_favorite": false
-  },
-  {
-    "id": "69cf1a2422072833cf407764",
-    "title": "https://youtu.be/paEuuY8hyXs?si=DX5VVmfNQjyImRFJ",
-    "description": "O Convite para o Estrelato 🌟\n\"Já imaginou trocar a poltrona pelo palco? No Cine Play, a estrela da noite é você! Venha viver a emoção de cantar seus sucessos favoritos com som de cinema e uma energia contagiante. Não importa se você é profissional ou cantor de chuveiro: aqui, o que vale é a diversão e a sua voz brilhando na tela grande. Prepare o gogó e venha dar um show!\"\n\nFoco na Conexão e Diversão 🥳\n\"Cantar sozinho é bom, mas no Cine Play é inesquecível! Reunimos os maiores hits de todos os tempos para uma experiência interativa onde ninguém fica parado. Traga seus amigos, escolha sua música e sinta a vibração de um cinema inteiro cantando com você. É mais que um filme, é o seu momento de soltar a voz!\"\n\nCurto e Impactante (Para Redes Sociais) 📱\n\"Luz, câmera... SOLTA O SOM! 🎶 O Cine Play convoca todos os amantes da música para uma noite onde o microfone é o protagonista. Venha cantar, se emocionar e transformar o cinema na sua pista de apresentações.",
-    "category": "karaoke",
-    "anime_subcategory": "",
-    "music_subcategory": "",
-    "source": "youtube",
-    "video_url": "https://youtu.be/paEuuY8hyXs?si=DX5VVmfNQjyImRFJ",
-    "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/dcec60eca_Gemini_Generated_Image_v5fxl9v5fxl9v5fx.png",
-    "year": "",
-    "duration": "",
-    "rating": 0,
-    "is_favorite": false
-  },
-  {
-    "id": "69cf19cd2a8826a00163e160",
-    "title": "https://youtu.be/0sXPSndsfWs?si=GUq9KPD3Gq7U_yB0",
-    "description": "O Convite para o Estrelato 🌟\n\"Já imaginou trocar a poltrona pelo palco? No Cine Play, a estrela da noite é você! Venha viver a emoção de cantar seus sucessos favoritos com som de cinema e uma energia contagiante. Não importa se você é profissional ou cantor de chuveiro: aqui, o que vale é a diversão e a sua voz brilhando na tela grande. Prepare o gogó e venha dar um show!\"\n\nFoco na Conexão e Diversão 🥳\n\"Cantar sozinho é bom, mas no Cine Play é inesquecível! Reunimos os maiores hits de todos os tempos para uma experiência interativa onde ninguém fica parado. Traga seus amigos, escolha sua música e sinta a vibração de um cinema inteiro cantando com você. É mais que um filme, é o seu momento de soltar a voz!\"\n\nCurto e Impactante (Para Redes Sociais) 📱\n\"Luz, câmera... SOLTA O SOM! 🎶 O Cine Play convoca todos os amantes da música para uma noite onde o microfone é o protagonista. Venha cantar, se emocionar e transformar o cinema na sua pista de apresentações.",
-    "category": "karaoke",
-    "anime_subcategory": "",
-    "music_subcategory": "",
-    "source": "youtube",
-    "video_url": "https://youtu.be/0sXPSndsfWs?si=GUq9KPD3Gq7U_yB0",
-    "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/4bef0393d_Gemini_Generated_Image_v5fxl9v5fxl9v5fx.png",
     "year": "",
     "duration": "",
     "rating": 0,
@@ -963,8 +950,7 @@ function renderHome() {
         <input id="searchInput" type="text" placeholder="Buscar..." value="${currentSearch}" oninput="onSearch(this.value)" />
       </div>
       <div class="navbar-actions">
-        <a class="btn-chat" href="https://joabeplay1.github.io/bate-papo/" target="_blank">💬 Bate-Papo</a>
-        <a class="btn-chat" href="https://joabeplay1.github.io/dama-brasileira-55/" target="_blank">🎮 Dama</a>
+        <button class="btn-karaoke" onclick="renderFerramentas()">🔧 Ferramentas</button>
         <button class="btn-karaoke" onclick="renderKaraoke()">🎙 Karaokê</button>
         <button class="btn-add" onclick="openModal()">+ Adicionar</button>
         <button class="logout-btn" onclick="doLogout()">Sair</button>
@@ -1234,6 +1220,172 @@ function openEditModal(id) {
   if (v.music_subcategory) document.getElementById('musicSubcat').value = v.music_subcategory;
   selectTab(v.source || 'youtube');
   currentThumbFile = null;
+}
+
+// ── FERRAMENTAS ───────────────────────────────────────────────────────────────
+function renderFerramentas() {
+  if (!isLoggedIn()) { renderLogin(); return; }
+  currentPage = 'ferramentas';
+  document.getElementById('app').innerHTML = `
+    <div class="tools-header">
+      <button class="back-btn" onclick="renderHome()">← Voltar</button>
+      <div class="tools-title">🔧 Ferramentas</div>
+    </div>
+    <div class="main">
+      <div class="tools-tabs">
+        <button class="tool-tab active" id="tabCorretor" onclick="switchTool('corretor')">✏️ Corretor de Texto</button>
+        <button class="tool-tab" id="tabCalc" onclick="switchTool('calc')">🧮 Calculadora</button>
+        <button class="tool-tab" id="tabChat" onclick="switchTool('chat')">💬 Bate-Papo</button>
+        <button class="tool-tab" id="tabDama" onclick="switchTool('dama')">🎮 Dama</button>
+      </div>
+      <div id="toolSection">
+        ${renderCorretorHTML()}
+      </div>
+    </div>
+  `;
+}
+
+function switchTool(tool) {
+  ['Corretor','Calc','Chat','Dama'].forEach(t => {
+    const el = document.getElementById('tab'+t);
+    if(el) el.classList.remove('active');
+  });
+  const map = {corretor:'Corretor',calc:'Calc',chat:'Chat',dama:'Dama'};
+  const el = document.getElementById('tab'+map[tool]);
+  if(el) el.classList.add('active');
+  const sec = document.getElementById('toolSection');
+  if(!sec) return;
+  if(tool==='corretor') sec.innerHTML = renderCorretorHTML();
+  else if(tool==='calc') sec.innerHTML = renderCalcHTML();
+  else if(tool==='chat') sec.innerHTML = '<iframe class="iframe-wrap" src="https://joabeplay1.github.io/bate-papo/" allow="camera;microphone"></iframe>';
+  else if(tool==='dama') sec.innerHTML = '<iframe class="iframe-wrap" src="https://joabeplay1.github.io/dama-brasileira-55/"></iframe>';
+}
+
+function renderCorretorHTML() {
+  return `
+    <div>
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:4px">Corretor de Texto com IA</h2>
+      <p style="color:var(--text-muted);font-size:13px;margin-bottom:16px">Corrija textos em português e até 10 idiomas.</p>
+      <div style="margin-bottom:12px">
+        <select class="tool-select" id="corrLang">
+          <option value="pt">🇧🇷 Português (Brasil)</option>
+          <option value="en">🇺🇸 English</option>
+          <option value="es">🇪🇸 Español</option>
+          <option value="fr">🇫🇷 Français</option>
+          <option value="de">🇩🇪 Deutsch</option>
+          <option value="it">🇮🇹 Italiano</option>
+          <option value="ja">🇯🇵 日本語</option>
+          <option value="ko">🇰🇷 한국어</option>
+          <option value="zh">🇨🇳 中文</option>
+          <option value="ar">🇸🇦 العربية</option>
+        </select>
+      </div>
+      <div class="tool-grid">
+        <div>
+          <div class="tool-label">Texto original</div>
+          <textarea class="tool-textarea" id="corrInput" placeholder="Cole ou escreva o texto..."></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn-tool" id="btnCorr" onclick="corrigirTexto()">✨ Corrigir</button>
+            <button class="btn-copy" onclick="document.getElementById('corrInput').value='';document.getElementById('corrOutput').value=''">Limpar</button>
+          </div>
+        </div>
+        <div>
+          <div class="tool-label">Texto corrigido</div>
+          <textarea class="tool-textarea" id="corrOutput" placeholder="O resultado aparecerá aqui..." readonly></textarea>
+          <div style="margin-top:8px">
+            <button class="btn-copy" onclick="navigator.clipboard.writeText(document.getElementById('corrOutput').value)">📋 Copiar resultado</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderCalcHTML() {
+  return `
+    <div style="max-width:340px;margin:0 auto">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:16px;text-align:center">🧮 Calculadora</h2>
+      <div class="calc-display">
+        <div class="calc-expr" id="calcExpr">0</div>
+        <div class="calc-result" id="calcDisp">0</div>
+      </div>
+      <div class="calc-btns">
+        <button class="calc-btn cl" onclick="calcPress('C')">C</button>
+        <button class="calc-btn cl" onclick="calcPress('⌫')">⌫</button>
+        <button class="calc-btn cl" onclick="calcPress('%')">%</button>
+        <button class="calc-btn op" onclick="calcPress('÷')">÷</button>
+        <button class="calc-btn" onclick="calcPress('7')">7</button>
+        <button class="calc-btn" onclick="calcPress('8')">8</button>
+        <button class="calc-btn" onclick="calcPress('9')">9</button>
+        <button class="calc-btn op" onclick="calcPress('×')">×</button>
+        <button class="calc-btn" onclick="calcPress('4')">4</button>
+        <button class="calc-btn" onclick="calcPress('5')">5</button>
+        <button class="calc-btn" onclick="calcPress('6')">6</button>
+        <button class="calc-btn op" onclick="calcPress('-')">-</button>
+        <button class="calc-btn" onclick="calcPress('1')">1</button>
+        <button class="calc-btn" onclick="calcPress('2')">2</button>
+        <button class="calc-btn" onclick="calcPress('3')">3</button>
+        <button class="calc-btn op" onclick="calcPress('+')">+</button>
+        <button class="calc-btn" onclick="calcPress('0')">0</button>
+        <button class="calc-btn" onclick="calcPress(',')">&#44;</button>
+        <button class="calc-btn" onclick="calcPress('.')">.</button>
+        <button class="calc-btn eq" onclick="calcPress('=')">=</button>
+      </div>
+    </div>
+  `;
+}
+
+let calcExpr = '';
+let calcJust = false;
+function calcPress(val) {
+  const disp = document.getElementById('calcDisp');
+  const expr = document.getElementById('calcExpr');
+  if(!disp||!expr) return;
+  if(calcJust && !isNaN(val)){ calcExpr=val; calcJust=false; disp.textContent=val; expr.textContent=val; return; }
+  if(calcJust) calcJust=false;
+  if(val==='C'){ calcExpr=''; disp.textContent='0'; expr.textContent='0'; return; }
+  if(val==='⌫'){ calcExpr=calcExpr.slice(0,-1)||''; disp.textContent=calcExpr||'0'; expr.textContent=calcExpr||'0'; return; }
+  if(val==='='){ 
+    try{
+      const res=Function('"use strict";return('+calcExpr.replace(/×/g,'*').replace(/÷/g,'/').replace(/,/g,'.')+')')();
+      const fmt=Number.isInteger(res)?String(res):res.toFixed(8).replace(/\.?0+$/,'');
+      disp.textContent=fmt; expr.textContent=fmt; calcExpr=fmt; calcJust=true;
+    }catch{ disp.textContent='Erro'; calcExpr=''; }
+    return;
+  }
+  if(val==='%'){
+    try{ const res=Function('"use strict";return('+calcExpr.replace(/×/g,'*').replace(/÷/g,'/')+')')() /100; const fmt=String(res); disp.textContent=fmt;expr.textContent=fmt;calcExpr=fmt; }catch{}
+    return;
+  }
+  calcExpr+=val; disp.textContent=calcExpr; expr.textContent=calcExpr;
+}
+
+async function corrigirTexto() {
+  const input = document.getElementById('corrInput')?.value?.trim();
+  if(!input) return;
+  const btn = document.getElementById('btnCorr');
+  const out = document.getElementById('corrOutput');
+  const langEl = document.getElementById('corrLang');
+  const langMap = {pt:'Português (Brasil)',en:'English',es:'Español',fr:'Français',de:'Deutsch',it:'Italiano',ja:'日本語',ko:'한국어',zh:'中文',ar:'العربية'};
+  const lang = langMap[langEl?.value||'pt']||'Português (Brasil)';
+  if(btn) btn.disabled=true, btn.textContent='⏳ Corrigindo...';
+  if(out) out.value='Corrigindo com IA...';
+  try {
+    const resp = await fetch('https://api.base44.app/api/apps/integrations/invoke', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        integration_type:'Core',
+        endpoint:'InvokeLLM',
+        params:{ prompt:'Corrija o texto abaixo na língua '+lang+'. Corrija erros de ortografia, gramática, pontuação e concordância. Mantenha o sentido original. Retorne APENAS o texto corrigido, sem explicações.\n\nTexto:\n'+input }
+      })
+    });
+    const data = await resp.json();
+    if(out) out.value = data.result || data.output || data || 'Erro ao corrigir';
+  } catch(e) {
+    if(out) out.value = 'Erro: não foi possível corrigir. Verifique sua conexão.';
+  }
+  if(btn) btn.disabled=false, btn.textContent='✨ Corrigir';
 }
 
 // ── KARAOKE ───────────────────────────────────────────────────────────────────
