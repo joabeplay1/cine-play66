@@ -58,7 +58,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   <div id="app"></div>
   <script>
 const ACCESS_PASSWORD = 'cineplay123';
-const MINHA_CHAVE_IA = "AIzaSyD16h0dRFmM5pzpCw78mnODpUSOX1tTRjQ";
+const MINHA_CHAVE_IA = AIzaSyD16h0dRFmM5pzpCw78mnODpUSOX1tTRjQ
 
 let videos = [
   { "id": "1", "title": "Mitsuki: Origem Misteriosa", "category": "animacao", "source": "google_drive", "video_url": "https://drive.google.com/file/d/1NfjWymfzeOriz_jcwKOzWmhS4XIAX-25/view", "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/6dd6c17bd_Gemini_Generated_Image_s55xpas55xpas55x.png" },
