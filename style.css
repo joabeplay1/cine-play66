@@ -1783,18 +1783,3 @@ function saveVideo() {
 if (isLoggedIn()) { renderHome(); } else { renderLogin(); }</script>
 </body>
 </html>
-/* Estilos para o anúncio no topo */
-.area-anuncio-topo {
-    width: 100%;
-    text-align: center;
-    margin: 25px 0;
-    display: flex;
-    justify-content: center;
-}
-
-.area-anuncio-topo img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px; /* Dá um efeito arredondado aos cantos do anúncio */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Opcional: cria uma pequena sombra de destaque */
-}
