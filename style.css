@@ -213,6 +213,21 @@ const ACCESS_PASSWORD = 'cineplay123';
 
 let videos = [
   {
+    "id": "69d2d5e70e7ceec6a03ad0b5",
+    "title": "Deidara vs Sasuke",
+    "description": "Essa luta é muito marcante porque vai além dos golpes; é um choque entre duas visões de mundo. Deidara vê a arte como algo momentâneo e explosivo (\"A arte é um estouro!\"), enquanto ele sente um profundo ressentimento pelo Sharingan 👁️, que ele considera uma \"arte\" natural e arrogante que desdenha do esforço dele. Do outro lado, Sasuke está em uma busca fria por vingança contra Itachi, vendo Deidara apenas como um obstáculo ou uma fonte de informação.Essa é uma excelente escolha! Focar na estratégia permite explorar como essa luta funciona quase como um jogo de xadrez mortal, onde cada movimento de Deidara exige uma resposta técnica precisa de Sasuke. ♟️⚡No começo, Deidara testa Sasuke com insetos explosivos (C1) e um dragão gigante (C2) que lança minas terrestres.\n\nPergunta: Você quer que a sinopse destaque como Sasuke usou as Espadas de Chidori para desarmar as bombas no solo ou prefere focar em como ele usou o Selo Amaldiçoado para ganhar altitude e alcançar o dragão?\n\n2. O Clímax Estratégico: C4 Karura\nA C4 Karura é uma técnica invisível onde micro-bombas entram na corrente sanguínea do adversário para desintegrá-lo de dentro para fora. 🦠💥\n\nPergunta: Como devemos descrever o momento em que Sasuke percebe o perigo? Devemos focar no uso do Sharingan para \"enxergar\" o chakra das bombas microscópicas ou na coragem dele de eletrocutar o próprio corpo para neutralizá-las?\n\n3. O Desfecho\nA luta termina com ambos exaustos, levando ao limite técnico.",
+    "category": "animacao",
+    "anime_subcategory": "naruto_shippuden",
+    "music_subcategory": "",
+    "source": "google_drive",
+    "video_url": "https://drive.google.com/file/d/11QVm_9BGeoJI9NA1pgWFhguMLq-rXOGJ/view?usp=sharing",
+    "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/5b4a31689_Gemini_Generated_Image_l1as9il1as9il1as.png",
+    "year": "",
+    "duration": "",
+    "rating": 0,
+    "is_favorite": true
+  },
+  {
     "id": "69d13854a2e2fcae66dd6af6",
     "title": "Bad Bunny:  Super Bowl",
     "description": "contemporânea: Lady Gaga e Tony Bennett (representado aqui em uma de suas célebres apresentações conjuntas). A cena transborda elegância e afeto, ilustrando a ponte entre o Jazz clássico 🎺 e o Pop moderno 🎤.Lady Gaga e Tony Bennett sempre trouxeram uma produção visual que mistura o luxo clássico com um toque de modernidade. Na foto, as roupas e a iluminação ao fundo criam uma atmosfera que nos transporta para outra época.A linguagem corporal é, sem dúvida, um dos pontos mais fortes dessa imagem. Ela transforma uma simples apresentação em uma narrativa de admiração mútua e amizade profunda. 🤝\n\nNote como o contato visual direto e o sorriso compartilhado criam uma \"bolha\" de intimidade, mesmo em um palco cercado por músicos e luzes. Essa proximidade física não é apenas coreografada; ela transmite uma passagem de bastão emocional entre o mestre do Jazz e a estrela que mantém esse legado vivo. 🌟",
