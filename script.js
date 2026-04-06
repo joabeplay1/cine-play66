@@ -1123,6 +1123,7 @@ function renderHome() {
         <input id="searchInput" type="text" placeholder="Buscar..." value="${currentSearch}" oninput="onSearch(this.value)" />
       </div>
       <div class="navbar-actions">
+        <button class="btn-karaoke" onclick="renderBiblia()">📖 Bíblia</button>
         <button class="btn-karaoke" onclick="renderFerramentas()">🔧 Ferramentas</button>
         <button class="btn-karaoke" onclick="renderKaraoke()">🎙 Karaokê</button>
         <button class="btn-add" onclick="openModal()">+ Adicionar</button>
@@ -1777,6 +1778,129 @@ function saveVideo() {
   currentThumbFile = null;
   closeModal();
   renderHome();
+}
+
+// ── BÍBLIA ────────────────────────────────────────────────────────────────────
+const LIVROS_BIBLIA = [
+  {id:'gn',nome:'Gênesis',caps:50,t:'AT'},{id:'ex',nome:'Êxodo',caps:40,t:'AT'},{id:'lv',nome:'Levítico',caps:27,t:'AT'},
+  {id:'nm',nome:'Números',caps:36,t:'AT'},{id:'dt',nome:'Deuteronômio',caps:34,t:'AT'},{id:'js',nome:'Josué',caps:24,t:'AT'},
+  {id:'jz',nome:'Juízes',caps:21,t:'AT'},{id:'rt',nome:'Rute',caps:4,t:'AT'},{id:'1sm',nome:'1 Samuel',caps:31,t:'AT'},
+  {id:'2sm',nome:'2 Samuel',caps:24,t:'AT'},{id:'1rs',nome:'1 Reis',caps:22,t:'AT'},{id:'2rs',nome:'2 Reis',caps:25,t:'AT'},
+  {id:'1cr',nome:'1 Crônicas',caps:29,t:'AT'},{id:'2cr',nome:'2 Crônicas',caps:36,t:'AT'},{id:'ed',nome:'Esdras',caps:10,t:'AT'},
+  {id:'ne',nome:'Neemias',caps:13,t:'AT'},{id:'et',nome:'Ester',caps:10,t:'AT'},{id:'jó',nome:'Jó',caps:42,t:'AT'},
+  {id:'sl',nome:'Salmos',caps:150,t:'AT'},{id:'pv',nome:'Provérbios',caps:31,t:'AT'},{id:'ec',nome:'Eclesiastes',caps:12,t:'AT'},
+  {id:'ct',nome:'Cantares',caps:8,t:'AT'},{id:'is',nome:'Isaías',caps:66,t:'AT'},{id:'jr',nome:'Jeremias',caps:52,t:'AT'},
+  {id:'lm',nome:'Lamentações',caps:5,t:'AT'},{id:'ez',nome:'Ezequiel',caps:48,t:'AT'},{id:'dn',nome:'Daniel',caps:12,t:'AT'},
+  {id:'os',nome:'Oseias',caps:14,t:'AT'},{id:'jl',nome:'Joel',caps:3,t:'AT'},{id:'am',nome:'Amós',caps:9,t:'AT'},
+  {id:'ob',nome:'Obadias',caps:1,t:'AT'},{id:'jn',nome:'Jonas',caps:4,t:'AT'},{id:'mq',nome:'Miquéias',caps:7,t:'AT'},
+  {id:'na',nome:'Naum',caps:3,t:'AT'},{id:'hc',nome:'Habacuque',caps:3,t:'AT'},{id:'sf',nome:'Sofonias',caps:3,t:'AT'},
+  {id:'ag',nome:'Ageu',caps:2,t:'AT'},{id:'zc',nome:'Zacarias',caps:14,t:'AT'},{id:'ml',nome:'Malaquias',caps:4,t:'AT'},
+  {id:'mt',nome:'Mateus',caps:28,t:'NT'},{id:'mc',nome:'Marcos',caps:16,t:'NT'},{id:'lc',nome:'Lucas',caps:24,t:'NT'},
+  {id:'jo',nome:'João',caps:21,t:'NT'},{id:'at',nome:'Atos',caps:28,t:'NT'},{id:'rm',nome:'Romanos',caps:16,t:'NT'},
+  {id:'1co',nome:'1 Coríntios',caps:16,t:'NT'},{id:'2co',nome:'2 Coríntios',caps:13,t:'NT'},{id:'gl',nome:'Gálatas',caps:6,t:'NT'},
+  {id:'ef',nome:'Efésios',caps:6,t:'NT'},{id:'fp',nome:'Filipenses',caps:4,t:'NT'},{id:'cl',nome:'Colossenses',caps:4,t:'NT'},
+  {id:'1ts',nome:'1 Tessalonicenses',caps:5,t:'NT'},{id:'2ts',nome:'2 Tessalonicenses',caps:3,t:'NT'},{id:'1tm',nome:'1 Timóteo',caps:6,t:'NT'},
+  {id:'2tm',nome:'2 Timóteo',caps:4,t:'NT'},{id:'tt',nome:'Tito',caps:3,t:'NT'},{id:'fm',nome:'Filemom',caps:1,t:'NT'},
+  {id:'hb',nome:'Hebreus',caps:13,t:'NT'},{id:'tg',nome:'Tiago',caps:5,t:'NT'},{id:'1pe',nome:'1 Pedro',caps:5,t:'NT'},
+  {id:'2pe',nome:'2 Pedro',caps:3,t:'NT'},{id:'1jo',nome:'1 João',caps:5,t:'NT'},{id:'2jo',nome:'2 João',caps:1,t:'NT'},
+  {id:'3jo',nome:'3 João',caps:1,t:'NT'},{id:'jd',nome:'Judas',caps:1,t:'NT'},{id:'ap',nome:'Apocalipse',caps:22,t:'NT'},
+];
+let bibliaLivro = null;
+let bibliaCap = 1;
+let bibliaSearch = '';
+
+function renderBiblia() {
+  if (!isLoggedIn()) { renderLogin(); return; }
+  currentPage = 'biblia';
+  const at = LIVROS_BIBLIA.filter(l=>l.t==='AT');
+  const nt = LIVROS_BIBLIA.filter(l=>l.t==='NT');
+  const renderGrupo = (lista) => lista.map(l=>`
+    <button class="cat-btn" onclick="bibliaAbrirCapitulos('${l.id}')" style="justify-content:space-between;width:100%;text-align:left;padding:10px 14px;border-radius:10px;margin-bottom:4px">
+      <span>${l.nome}</span><span style="font-size:11px;opacity:.5">${l.caps} cap.</span>
+    </button>
+  `).join('');
+  document.getElementById('app').innerHTML = `
+    <div class="tools-header">
+      <button class="back-btn" onclick="renderHome()">← Voltar</button>
+      <div class="tools-title">📖 Bíblia Sagrada</div>
+      <div style="flex:1;max-width:300px;position:relative;margin-left:16px">
+        <input class="form-input" style="padding-left:32px;border-radius:999px;height:36px" id="bibliaSearch" placeholder="Buscar versículo..." value="${bibliaSearch}" oninput="bibliaBuscar(this.value)" />
+        <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:.5">🔍</span>
+      </div>
+    </div>
+    <div class="main" style="max-width:800px">
+      <h3 style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">📜 Antigo Testamento</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:24px">${renderGrupo(at)}</div>
+      <h3 style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">✝️ Novo Testamento</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">${renderGrupo(nt)}</div>
+    </div>
+  `;
+}
+
+function bibliaBuscar(val) {
+  bibliaSearch = val;
+}
+
+function bibliaAbrirCapitulos(id) {
+  bibliaLivro = LIVROS_BIBLIA.find(l=>l.id===id);
+  if (!bibliaLivro) return;
+  const caps = Array.from({length:bibliaLivro.caps},(_,i)=>i+1);
+  document.getElementById('app').innerHTML = `
+    <div class="tools-header">
+      <button class="back-btn" onclick="renderBiblia()">← Livros</button>
+      <div class="tools-title">📖 ${bibliaLivro.nome}</div>
+    </div>
+    <div class="main" style="max-width:600px">
+      <p style="color:var(--text-muted);font-size:13px;margin-bottom:16px">Selecione um capítulo:</p>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px">
+        ${caps.map(c=>`<button class="calc-btn" onclick="bibliaAbrirCap(${c})" style="height:48px">${c}</button>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+async function bibliaAbrirCap(cap) {
+  bibliaCap = cap;
+  if (!bibliaLivro) return;
+  document.getElementById('app').innerHTML = `
+    <div class="tools-header">
+      <button class="back-btn" onclick="bibliaAbrirCapitulos('${bibliaLivro.id}')">← ${bibliaLivro.nome}</button>
+      <div class="tools-title">${bibliaLivro.nome} ${cap}</div>
+      ${cap > 1 ? `<button class="btn-karaoke" onclick="bibliaAbrirCap(${cap-1})">◀ Cap.${cap-1}</button>` : ''}
+      ${cap < bibliaLivro.caps ? `<button class="btn-karaoke" onclick="bibliaAbrirCap(${cap+1})">Cap.${cap+1} ▶</button>` : ''}
+    </div>
+    <div class="main" style="max-width:700px" id="bibliaContent">
+      <div style="text-align:center;padding:40px;color:var(--text-muted)">⏳ Carregando...</div>
+    </div>
+  `;
+  try {
+    const url = `https://raw.githubusercontent.com/MaatheusGois/bible/main/versions/pt-br/arc/${bibliaLivro.id}/${cap}/${cap}.json`;
+    const resp = await fetch(url);
+    const data = await resp.json();
+    let versiculos = [];
+    if (Array.isArray(data)) versiculos = data.map((t,i)=>({n:i+1,t}));
+    else if (typeof data === 'object') versiculos = Object.entries(data).map(([k,v])=>({n:parseInt(k),t:v}));
+    const html = versiculos.map(v=>`
+      <div style="padding:10px 14px;border-radius:10px;margin-bottom:4px;cursor:pointer;transition:background .2s" 
+           onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"
+           title="Clique para copiar">
+        <span style="color:#f6a623;font-weight:700;font-size:12px;margin-right:8px">${v.n}</span>
+        <span style="line-height:1.8;font-size:15px">${v.t}</span>
+      </div>
+    `).join('');
+    const content = document.getElementById('bibliaContent');
+    if (content) content.innerHTML = `
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:#f6a623;margin-bottom:20px">${bibliaLivro.nome} — Capítulo ${cap}</h2>
+      ${html}
+      <div style="display:flex;justify-content:space-between;margin-top:24px;padding-top:16px;border-top:1px solid var(--border)">
+        ${cap>1?`<button class="btn-karaoke" onclick="bibliaAbrirCap(${cap-1})">◀ Capítulo ${cap-1}</button>`:'<span></span>'}
+        ${cap<bibliaLivro.caps?`<button class="btn-karaoke" onclick="bibliaAbrirCap(${cap+1})">Capítulo ${cap+1} ▶</button>`:'<span></span>'}
+      </div>
+    `;
+  } catch(e) {
+    const content = document.getElementById('bibliaContent');
+    if (content) content.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px">Erro ao carregar. Verifique sua conexão.</p>';
+  }
 }
 
 // ── START ─────────────────────────────────────────────────────────────────────
