@@ -213,8 +213,38 @@ const ACCESS_PASSWORD = 'cineplay123';
 
 let videos = [
   {
+    "id": "69d41450c1cc3c096f42b9a2",
+    "title": "Chucky: O Rei do Passinho 🧢",
+    "description": "Imagine que o Chucky cansou da vida de vilão de filme de terror e decidiu que seu verdadeiro destino é brilhar nos palcos. Aqui estão três caminhos cômicos que podemos seguir para essa sinopse: O Influencer de Centavos: Chucky tenta viralizar no TikTok fazendo a \"dança da garrafa\", mas o tamanho das pernas dele dificulta o processo e ele acaba descontando a frustração no ring-light. 📱 Ritmo de Vingança: Um musical da Broadway onde os assassinatos são substituídos por duelos de sapateado intensos, e o \"Olha o Chucky vindo aí\" é o hit do verão. 🎭 De Volta aos Anos 80: Ele invade uma academia de aeróbica usando polainas e tenta provar que um boneco de plástico tem muito mais molejo que qualquer humano de carne e osso. 🏋️‍♂️",
+    "category": "videos_engracados",
+    "anime_subcategory": "",
+    "music_subcategory": "",
+    "source": "google_drive",
+    "video_url": "https://drive.google.com/file/d/14DyAnKhiiQuBvoxNZK0G65EZO7VyECVO/view?usp=drive_link",
+    "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/85ef4aea9_videoengraado.mp4",
+    "year": "2026",
+    "duration": "",
+    "rating": 0,
+    "is_favorite": false
+  },
+  {
+    "id": "69d410c314a4bc4fccd0a6ca",
+    "title": "Sasuke Uchiha e Killer Bee (o Jinchūriki do Oito-Caudas)",
+    "description": "A batalha entre Sasuke Uchiha e Killer Bee (o Jinchūriki do Oito-Caudas) é um dos confrontos mais dinâmicos de Naruto Shippuden. É o momento em que a nova equipe de Sasuke, a Taka, enfrenta pela primeira vez o poder avassalador de uma Besta com Cauda 🐙 totalmente controlada.Essa luta é famosa por mostrar que nem sempre o Sharingan é invencível. Sasuke, recém-saído de sua batalha contra Itachi, acredita que seu novo poder é suficiente, mas encontra em Killer Bee um adversário com um estilo de luta totalmente imprevisível.",
+    "category": "animacao",
+    "anime_subcategory": "naruto_shippuden",
+    "music_subcategory": "",
+    "source": "google_drive",
+    "video_url": "https://drive.google.com/file/d/1SUd4il8eIY0kFXg6Xp1wvebWWiLRx7g4/view?usp=sharing",
+    "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/413022005_Gemini_Generated_Image_h9k6r6h9k6r6h9k6.png",
+    "year": "",
+    "duration": "",
+    "rating": 0,
+    "is_favorite": false
+  },
+  {
     "id": "69d3cf050883b3e69d822e2d",
-    "title": "O Palhaço Infinito e o Segredo do Tempero",
+    "title": "O Palhaço Infinito e o Segredo do Tempero kk",
     "description": "Título da Brincadeira: O Macaco e o Homem do Sazon\n\nCena:\n\nA brincadeira acontece em um ambiente natural, como um parque ou floresta, onde um homem está sentado relaxando e cozinhando com alguns temperos Sazon por perto. Um ator vestido como um macaco esperto e travesso se aproxima do homem de forma sorrateira.\n\nInteração:\n\nAbraço Surpresa: O \"macaco\" de repente dá um abraço carinhoso e surpreendente no homem, pegando-o de surpresa. O homem fica chocado e confuso com o abraço inesperado do animal.\n\nO Pedido: Enquanto abraça o homem, o macaco aponta para os pacotes de Sazon e faz gestos indicando que quer um. Ele pode usar mímica para mostrar que quer comer ou cozinhar com o tempero.\n\nA Reação do Homem: O homem fica surpreso e divertido com o pedido do macaco. Ele pode rir, conversar com o macaco e tentar entender o que ele quer. Ele pode até dar um pacote de Sazon para o macaco para ver o que acontece.\n\nAs Palhaçadas do Macaco: O macaco pode continuar suas travessuras, como tentar abrir o pacote de Sazon com as mãos, cheirar o tempero com curiosidade ou até mesmo tentar usá-lo para cozinhar algo imaginário.\n\nO Encerramento: A brincadeira termina com o homem e o macaco rindo e se divertindo juntos. O homem pode dar um abraço de despedida no macaco, e o macaco pode fugir com o seu precioso pacote de Sazon.",
     "category": "videos_engracados",
     "anime_subcategory": "",
@@ -222,22 +252,7 @@ let videos = [
     "source": "google_drive",
     "video_url": "https://drive.google.com/file/d/1lznmiAN_GRm9pIvFU7Jz3_xnTWbEAVnF/view?usp=sharing",
     "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/bae27ea4e_macocomemorda.mp4",
-    "year": "",
-    "duration": "",
-    "rating": 0,
-    "is_favorite": true
-  },
-  {
-    "id": "69d324f07ee8fab6a0d29a03",
-    "title": "Chucky: O Rei do Passinho 🧢",
-    "description": "Chucky: O Rei do Passinho 🧢\nImagine que o Chucky cansou da vida de vilão de filme de terror e decidiu que seu verdadeiro destino é brilhar nos palcos.\n\nAqui estão três caminhos cômicos que podemos seguir para essa sinopse:\n\nO Influencer de Centavos: Chucky tenta viralizar no TikTok fazendo a \"dança da garrafa\", mas o tamanho das pernas dele dificulta o processo e ele acaba descontando a frustração no ring-light. 📱\n\nRitmo de Vingança: Um musical da Broadway onde os assassinatos são substituídos por duelos de sapateado intensos, e o \"Olha o Chucky vindo aí\" é o hit do verão. 🎭\n\nDe Volta aos Anos 80: Ele invade uma academia de aeróbica usando polainas e tenta provar que um boneco de plástico tem muito mais molejo que qualquer humano de carne e osso. 🏋️‍♂️",
-    "category": "videos_engracados",
-    "anime_subcategory": "",
-    "music_subcategory": "",
-    "source": "google_drive",
-    "video_url": "https://drive.google.com/file/d/14DyAnKhiiQuBvoxNZK0G65EZO7VyECVO/view?usp=drive_link",
-    "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/973af1cd7_videoengraado.mp4",
-    "year": "",
+    "year": "00",
     "duration": "",
     "rating": 0,
     "is_favorite": true
@@ -255,7 +270,7 @@ let videos = [
     "year": "",
     "duration": "",
     "rating": 0,
-    "is_favorite": true
+    "is_favorite": false
   },
   {
     "id": "69d13854a2e2fcae66dd6af6",
@@ -525,7 +540,7 @@ let videos = [
     "year": "",
     "duration": "",
     "rating": 0,
-    "is_favorite": true
+    "is_favorite": false
   },
   {
     "id": "69cf18c56cdc7176ad66e124",
