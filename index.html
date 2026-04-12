@@ -213,15 +213,15 @@ const ACCESS_PASSWORD = 'cineplay123';
 
 let videos = [
   {
-    "id": "69dae7373e55d00a53a88978",
-    "title": "ALOK Tomorrowland Brasil 2025",
-    "description": "Como estamos atualmente em abril de 2026, o Tomorrowland Brasil 2025 já aconteceu! Foi uma grande celebração de 3 dias que reuniu o \"Povo do Amanhã\". 🌍✨\n\nVamos revisitar os detalhes chave dessa edição:\n\n📅 Visão Geral do Evento\nDatas: 10 a 12 de outubro de 2025\n\nLocalização: Parque Maeda, Itu, São Paulo 🇧🇷\n\nTema: \"VIDA\" 🌱 — Este tema serviu como prelúdio de \"Elixir da Vida\" de 2016, explorando o reino mítico de Silvyra, onde natureza e humanidade coexistem em harmonia.\n\nPúblico: Aproximadamente 180.000 pessoas durante o fim de semana.\n\n🎧 Destaques da Escalação\nO festival contou com mais de 150 artistas distribuídos em 6 palcos. Alguns dos principais atrações principais incluíram:\n\nEstrelas internacionais: Armin van Buuren, David Guetta, Alesso, Axwell, Steve Aoki e Charlotte de Witte.\n\nÍcones brasileiros: Alok (que fez um show de drones recorde!), Vintage Culture, ANNA e Zerb.Como estamos olhando para trás para o Tomorrowland Brasil 2025 a partir do nosso ponto atual em abril de 2026, há algumas ótimas maneiras de reviver o tema \"VIDA\" e a energia do Parque Maeda. 🎡✨\n\n📽️ O Aftermovie Oficial\nO Aftermovie de 2025 foi lançado no final do ano passado. É uma jornada cinematográfica de 20 minutos que acompanha a história de Silvyra 🌿, com grandes planos de drone do palco principal e os melhores momentos da plateia. Você pode encontrá-lo no canal oficial do Tomorrowland no YouTube.\n\n🎧 Sets Completos ao Vivo\nA maioria dos artistas da programação de 2025 tem seus sets completos disponíveis online. Algumas das apresentações mais assistidas incluem:\n\nAlok: Conhecido por sua enorme produção visual e show de drones. 🛸\n\nCharlotte de Witte: Uma masterclass de techno de alta energia no estágio CORE. 🌲\n\nCultura Vintage: Um pôr do sol que capturou perfeitamente o espírito brasileiro. 🌅\n\n📸 Galeria Digital de Fotos\nO aplicativo e site oficial da Tomorrowland ainda abrigam a galeria \"People of Tomorrow\", onde você pode ver fotos em alta definição dos figurinos, dos palcos e dos fogos de artifício. 🎆",
+    "id": "69daf3e031253d641a1a3f7d",
+    "title": "Tomorrowland Brasil 2025 ",
+    "description": "Como estamos atualmente em abril de 2026, o Tomorrowland Brasil 2025 já aconteceu! Foi uma grande celebração de 3 dias que reuniu o \"Povo do Amanhã\". 🌍✨\n\nVamos revisitar os detalhes chave dessa edição:\n\n📅 Visão Geral do Evento\nDatas: 10 a 12 de outubro de 2025\n\nLocalização: Parque Maeda, Itu, São Paulo 🇧🇷\n\nTema: \"VIDA\" 🌱 — Este tema serviu como prelúdio para \"Elixir da Vida\" de 2016, explorando o reino mítico de Silvyra onde natureza e humanidade coexistem em harmonia.\n\nPúblico: Aproximadamente 180.000 pessoas do outro lado do fim de semana.\n\n🎧 Destaques da Escalação\nO festival contou com mais de 150 artistas distribuídos em 6 palcos. Alguns dos principais atrações principais incluíram:\n\nEstrelas internacionais: Armin van Buuren, David Guetta, Alesso, Axwell, Steve Aoki e Charlotte de Witte.\n\nÍcones Brasileiros: Alok (que fez um show de drones recorde!), Vintage Culture, ANNA e Zerb.",
     "category": "musica_ao_vivo",
     "anime_subcategory": "",
     "music_subcategory": "",
     "source": "google_drive",
-    "video_url": "https://drive.google.com/file/d/1tbJXT97xiZI5VcxJIsEmr_NM_Ix8I5AJ/view?usp=sharing",
-    "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/f27065391_alok.mp4",
+    "video_url": "https://drive.google.com/file/d/1tbJXT97xiZI5VcxJIsEmr_NM_Ix8I5AJ/view?usp=drive_link",
+    "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/2953e0169_alok22.mp4",
     "year": "",
     "duration": "",
     "rating": 0,
