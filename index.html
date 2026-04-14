@@ -1483,10 +1483,12 @@ function openDetail(id) {
 }
 
 function closeDetail(e) {
-  if (e && e.target !== document.getElementById('detailBg')) return;
+  // Removemos a linha do "return" para o código sempre rodar até o fim
   const bg = document.getElementById('detailBg');
   if (bg) bg.classList.add('hidden');
-  document.body.style.overflow = '';
+  
+  // Agora o scroll sempre será destravado, não importa onde você clicou
+  document.body.style.overflow = 'auto'; 
 }
 
 function toggleFavDetail(id) {
