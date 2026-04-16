@@ -1514,12 +1514,11 @@ function renderFerramentas() {
     </div>
     <div class="main">
       <div class="tools-tabs">
-    <button class="tool-tab active" id="tabCorretor" onclick="switchTool('corretor')">✏️ Corretor de Texto</button>
-    <button class="tool-tab" id="tabCalc" onclick="switchTool('calc')">🧮 Calculadora</button>
-    <button class="tool-tab" id="tabChat" onclick="switchTool('chat')">💬 Bate-Papo</button>
-    <button class="tool-tab" id="tabDama" onclick="switchTool('dama')">🎮 Dama</button>
-    <button class="tool-tab" id="tabDomino" onclick="switchTool('domino')">🎲 Dominó</button>
-</div>
+        <button class="tool-tab active" id="tabCorretor" onclick="switchTool('corretor')">✏️ Corretor de Texto</button>
+        <button class="tool-tab" id="tabCalc" onclick="switchTool('calc')">🧮 Calculadora</button>
+        <button class="tool-tab" id="tabChat" onclick="switchTool('chat')">💬 Bate-Papo</button>
+        <button class="tool-tab" id="tabDama" onclick="switchTool('dama')">🎮 Dama</button>
+      </div>
       <div id="toolSection">
         ${renderCorretorHTML()}
       </div>
@@ -1527,23 +1526,21 @@ function renderFerramentas() {
   `;
 }
 
-['Corretor','Calc','Chat','Dama','Domino'].forEach(t => {
+function switchTool(tool) {
+  ['Corretor','Calc','Chat','Dama'].forEach(t => {
     const el = document.getElementById('tab'+t);
     if(el) el.classList.remove('active');
   });
-
-  const map = {corretor:'Corretor',calc:'Calc',chat:'Chat',dama:'Dama',domino:'Domino'};
+  const map = {corretor:'Corretor',calc:'Calc',chat:'Chat',dama:'Dama'};
   const el = document.getElementById('tab'+map[tool]);
   if(el) el.classList.add('active');
-
   const sec = document.getElementById('toolSection');
   if(!sec) return;
-
   if(tool==='corretor') sec.innerHTML = renderCorretorHTML();
   else if(tool==='calc') sec.innerHTML = renderCalcHTML();
   else if(tool==='chat') sec.innerHTML = '<iframe class="iframe-wrap" src="https://joabeplay1.github.io/bate-papo/" allow="camera;microphone"></iframe>';
   else if(tool==='dama') sec.innerHTML = '<iframe class="iframe-wrap" src="https://joabeplay1.github.io/dama-brasileira-55/"></iframe>';
-  else if(tool==='domino') sec.innerHTML = '<iframe class="iframe-wrap" src="https://joabeplay1.github.io/domino-9999/"></iframe>';
+}
 
 function renderCorretorHTML() {
   return `
