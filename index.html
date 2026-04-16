@@ -1518,7 +1518,7 @@ function renderFerramentas() {
         <button class="tool-tab" id="tabCalc" onclick="switchTool('calc')">🧮 Calculadora</button>
         <button class="tool-tab" id="tabChat" onclick="switchTool('chat')">💬 Bate-Papo</button>
         <button class="tool-tab" id="tabDama" onclick="switchTool('dama')">🎮 Dama</button>
-        <button class="tool-tab" id="tabDomino" onclick="switchTool('domino')">🎲 Dominó</button>
+       <button class="tool-tab" id="tabDomino" onclick="switchTool('domino')">🎲 Dominó</button>
       </div>
       <div id="toolSection">
         ${renderCorretorHTML()}
@@ -1528,30 +1528,43 @@ function renderFerramentas() {
 }
 
 function switchTool(tool) {
-  // 1. Limpa a marcação de botão ativo (Adicionamos 'Domino' na lista)
-  ['Corretor','Calc','Chat','Dama','Domino'].forEach(t => {
-    const el = document.getElementById('tab'+t);
-    if(el) el.classList.remove('active');
+  // 1. Limpa a marcação de botão ativo de todas as ferramentas
+  ['Corretor', 'Calc', 'Chat', 'Dama', 'Domino'].forEach(t => {
+    const el = document.getElementById('tab' + t);
+    if (el) el.classList.remove('active');
   });
 
-  // 2. Mapeia qual ID de aba deve ficar ativo
-  const map = {corretor:'Corretor', calc:'Calc', chat:'Chat', dama:'Dama', domino:'Domino'};
-  const el = document.getElementById('tab'+map[tool]);
-  if(el) el.classList.add('active');
+  // 2. Mapeia qual ferramenta deve ser ativada
+  const map = {
+    corretor: 'Corretor',
+    calc: 'Calc',
+    chat: 'Chat',
+    dama: 'Dama',
+    domino: 'Domino'
+  };
 
-  // 3. Troca o conteúdo da tela
+  const el = document.getElementById('tab' + map[tool]);
+  if (el) el.classList.add('active');
+
+  // 3. Troca o conteúdo da tela (Iframe ou HTML)
   const sec = document.getElementById('toolSection');
-  if(!sec) return;
+  if (!sec) return;
 
- if(tool==='corretor') sec.innerHTML = renderCorretorHTML();
-else if(tool==='calc') sec.innerHTML = renderCalcHTML();
-else if(tool==='chat') sec.innerHTML = '<iframe class="iframe-wrap" src="https://joabeplay1.github.io/bate-papo/" allow="camera;microphone"></iframe>';
-else if(tool==='dama') sec.innerHTML = '<iframe class="iframe-wrap" src="https://joabeplay1.github.io/dama-brasileira-55/"></iframe>';
-else if(tool==='domino') sec.innerHTML = '<iframe class="iframe-wrap" src="https://joabeplay1.github.io/domino-9999/"></iframe>';
-  // AQUI É O SEU NOVO SITE:
-  else if(tool==='domino') sec.innerHTML = '<iframe class="iframe-wrap" src="https://joabeplay1.github.io/domino-9999/"></iframe>';
+  if (tool === 'corretor') {
+    sec.innerHTML = renderCorretorHTML();
+  } else if (tool === 'calc') {
+    sec.innerHTML = renderCalcHTML();
+  } else if (tool === 'chat') {
+    sec.innerHTML = '<iframe class="iframe-wrap" src="https://joabeplay1.github.io/bate-papo/" allow="camera;microphone"></iframe>';
+  } else if (tool === 'dama') {
+    sec.innerHTML = '<iframe class="iframe-wrap" src="https://joabeplay1.github.io/dama-brasileira-55/"></iframe>';
+  } else if (tool === 'domino') {
+    sec.innerHTML = '<iframe class="iframe-wrap" src="https://joabeplay1.github.io/domino-9999/"></iframe>';
+  }
 }
+} // <--- Esta chave fecha a função switchTool corretamente!
 
+function renderCorretorHTML() {
 function renderCorretorHTML() {
   return `
     <div>
