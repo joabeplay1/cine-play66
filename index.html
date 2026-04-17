@@ -206,6 +206,39 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   .logo-text{display:none;}
   .form-row{grid-template-columns:1fr;}
   .karaoke-header{gap:8px;}
+/* ===== COLE DENTRO DO SEU <style> (antes do </style>) ===== */
+
+/* Modal de nome */
+.nm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);align-items:center;justify-content:center;z-index:99999;padding:20px;}
+.nm-overlay.show{display:flex;}
+.nm-box{background:#111;border:1px solid rgba(229,62,62,.35);border-radius:22px;padding:44px 36px;max-width:400px;width:100%;text-align:center;animation:nmIn .3s ease;}
+@keyframes nmIn{from{opacity:0;transform:scale(.88) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.nm-box h2{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#f0f0f0;margin-bottom:6px;}
+.nm-box p{color:#888;font-size:13px;margin-bottom:22px;}
+.nm-input{width:100%;padding:13px 16px;background:#1a1a1a;border:1px solid #222;border-radius:10px;color:#f0f0f0;font-size:15px;outline:none;margin-bottom:12px;}
+.nm-input:focus{border-color:#e53e3e;}
+.nm-btn{width:100%;padding:13px;background:#e53e3e;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;}
+.nm-btn:hover{background:#c53030;}
+.nm-btn:disabled{opacity:.4;cursor:not-allowed;}
+.nm-hint{color:#555;font-size:11px;margin-top:8px;}
+
+/* Widget visitantes (canto inferior direito) */
+.vw-widget{position:fixed;bottom:20px;right:20px;width:290px;background:rgba(17,17,17,.97);border:1px solid rgba(229,62,62,.25);border-radius:16px;z-index:9000;display:none;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.5);}
+.vw-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;background:rgba(229,62,62,.08);border-bottom:1px solid rgba(229,62,62,.15);}
+.vw-head h3{font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px;color:#f0f0f0;}
+.vw-pulse{width:7px;height:7px;background:#4ade80;border-radius:50%;animation:vwp 2s infinite;}
+@keyframes vwp{0%,100%{opacity:1}50%{opacity:.4;transform:scale(1.5)}}
+.vw-cnt{background:rgba(74,222,128,.12);color:#4ade80;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:700;}
+.vw-list{padding:8px;max-height:300px;overflow-y:auto;}
+.vw-list::-webkit-scrollbar{width:3px;}
+.vw-list::-webkit-scrollbar-thumb{background:rgba(229,62,62,.3);border-radius:3px;}
+.vw-item{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:9px;margin-bottom:4px;}
+.vw-item.me{background:rgba(229,62,62,.08);border:1px solid rgba(229,62,62,.18);}
+.vw-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;position:relative;}
+.vw-dot{position:absolute;bottom:-1px;right:-1px;width:9px;height:9px;background:#4ade80;border-radius:50%;border:2px solid #111;}
+.vw-name{font-size:12px;font-weight:500;color:#f0f0f0;}
+.vw-you{font-size:10px;color:#e53e3e;margin-left:4px;}
+.vw-empty{text-align:center;padding:28px 12px;color:#555;font-size:12px;}
 }</style>
 </head>
 <body>
@@ -1524,6 +1557,7 @@ function renderFerramentas() {
         <button class="tool-tab" id="tabCalc" onclick="switchTool('calc')">🧮 Calculadora</button>
         <button class="tool-tab" id="tabChat" onclick="switchTool('chat')">💬 Bate-Papo</button>
         <button class="tool-tab" id="tabDama" onclick="switchTool('dama')">🎮 Dama</button>
+        <button class="tool-tab" id="tabMonitoramento" onclick="switchTool('monitoramento')">📊 Monitoramento</button>
       </div>
       <div id="toolSection">
         ${renderCorretorHTML()}
@@ -1532,7 +1566,7 @@ function renderFerramentas() {
   `;
 }
 
-function switchTool(tool) {
+['Corretor', 'Calc', 'Chat', 'Dama', 'Monitoramento'].forEach(t => {
   ['Corretor','Calc','Chat','Dama'].forEach(t => {
     const el = document.getElementById('tab'+t);
     if(el) el.classList.remove('active');
@@ -1981,8 +2015,181 @@ particlesJS("particles-js", {
     document.body.style.overflow = 'auto'; // Destrava o scroll
   }
 </script>
+<!-- ===== MODAL DE NOME — Cole antes do </body> ===== -->
+<div class="nm-overlay" id="nmOverlay">
+  <div class="nm-box">
+    <div style="font-size:44px;margin-bottom:12px">👋</div>
+    <h2>Bem-vindo ao Cine Play!</h2>
+    <p>Digite seu nome para entrar e aparecer<br>na lista de visitantes online</p>
+    <input class="nm-input" type="text" id="nmInput" placeholder="Seu nome..." maxlength="30">
+    <button class="nm-btn" id="nmBtn" disabled>Entrar no Cine Play</button>
+    <p class="nm-hint">Mínimo de 2 caracteres</p>
+  </div>
+</div>
+<!-- ===== WIDGET VISITANTES — Cole antes do </body> ===== -->
+<div class="vw-widget" id="vwWidget">
+  <div class="vw-head">
+    <h3><span class="vw-pulse"></span> Online agora</h3>
+    <span class="vw-cnt" id="vwCnt">0</span>
+  </div>
+  <div class="vw-list" id="vwList">
+    <div class="vw-empty">Carregando...</div>
+  </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 
+<script>
+  // CONFIGURAÇÃO DO SEU FIREBASE (Troque pelos seus dados!)
+  const firebaseConfig = {
+    apiKey: "SUA_API_KEY_AQUI",
+    authDomain: "SEU_PROJETO.firebaseapp.com",
+    databaseURL: "https://SEU_PROJETO.firebaseio.com",
+    projectId: "SEU_PROJETO",
+    storageBucket: "SEU_PROJETO.appspot.com",
+    messagingSenderId: "000000000000",
+    appId: "1:000000000000:web:000000000000"
+  };
+
+  // Inicializa o Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  // Função para mostrar o modal de nome se não tiver nome salvo
+  function verificarNome() {
+    const nomeSalvo = localStorage.getItem('cineplay_user_name');
+    if (!nomeSalvo) {
+      document.querySelector('.nm-overlay').classList.add('show');
+    } else {
+      registrarPresenca(nomeSalvo);
+    }
+  }
+
+  // Salvar nome e entrar
+  function salvarNome() {
+    const input = document.getElementById('userNameInput');
+    const nome = input.value.trim();
+    if (nome) {
+      localStorage.setItem('cineplay_user_name', nome);
+      document.querySelector('.nm-overlay').classList.remove('show');
+      registrarPresenca(nome);
+    }
+  }
+
+  function registrarPresenca(nome) {
+    const userRef = db.ref('status/' + nome);
+    // Marca como online e remove quando desconectar
+    userRef.set({
+      nome: nome,
+      lastOnline: firebase.database.ServerValue.TIMESTAMP
+    });
+    userRef.onDisconnect().remove();
+    
+    // Atualiza a lista de visitantes
+    db.ref('status').on('value', snapshot => {
+      const users = snapshot.val() || {};
+      atualizarInterface(users);
+    });
+  }
+
+  function atualizarInterface(users) {
+    const lista = document.getElementById('monitorList');
+    const widgetLista = document.getElementById('vwList');
+    const nomes = Object.keys(users);
+    
+    let html = '';
+    nomes.forEach(n => {
+      html += `<div class="vw-item"><div class="vw-avatar" style="background:#e53e3e">${n.charAt(0)}</div><span class="vw-name">${n}</span></div>`;
+    });
+
+    if(lista) lista.innerHTML = html || '<div class="vw-empty">Ninguém online</div>';
+    if(widgetLista) widgetLista.innerHTML = html;
+    document.getElementById('countOnline').innerText = nomes.length;
+    document.querySelector('.vw-cnt').innerText = nomes.length;
+  }
+
+  // Inicia tudo
+  verificarNome();
+</script>
+<script>
+  // CONFIGURAÇÃO DO SEU FIREBASE (DAMA-77)
+  const firebaseConfig = {
+    apiKey: "AIzaSyAEhCjjnW2dzOd1gRLc0KHkf3lOEYqje0c",
+    authDomain: "dama-77.firebaseapp.com",
+    databaseURL: "https://dama-77-default-rtdb.firebaseio.com",
+    projectId: "dama-77",
+    storageBucket: "dama-77.firebasestorage.app",
+    messagingSenderId: "267002047594",
+    appId: "1:267002047594:web:4e8ce8f19f8e18b8a26e13",
+    measurementId: "G-LDXV8LCWTB"
+  };
+
+  // Inicializa o Firebase (Versão Compat)
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  const db = firebase.database();
+
+  // Função para verificar se o usuário já tem nome
+  function verificarNome() {
+    const nomeSalvo = localStorage.getItem('cp_user_name');
+    if (!nomeSalvo) {
+      document.querySelector('.nm-overlay').classList.add('show');
+    } else {
+      registrarPresenca(nomeSalvo);
+    }
+  }
+
+  // Função chamada pelo botão "Entrar" do modal
+  window.salvarNome = function() {
+    const input = document.getElementById('userNameInput');
+    const nome = input.value.trim();
+    if (nome) {
+      localStorage.setItem('cp_user_name', nome);
+      document.querySelector('.nm-overlay').classList.remove('show');
+      registrarPresenca(nome);
+    }
+  };
+
+  function registrarPresenca(nome) {
+    const userRef = db.ref('status/' + nome);
+    userRef.set({
+      nome: nome,
+      online: true,
+      lastSeen: firebase.database.ServerValue.TIMESTAMP
+    });
+    userRef.onDisconnect().remove();
+
+    // Escuta mudanças no banco para atualizar a lista
+    db.ref('status').on('value', (snapshot) => {
+      const users = snapshot.val() || {};
+      const nomesOnline = Object.keys(users);
+      atualizarInterface(nomesOnline);
+    });
+  }
+
+  function atualizarInterface(nomes) {
+    const listaWidget = document.getElementById('vwList');
+    const contadorWidget = document.querySelector('.vw-cnt');
+    const listaPainel = document.getElementById('monitorList');
+    const contadorPainel = document.getElementById('countOnline');
+
+    let html = nomes.map(n => `
+      <div class="vw-item">
+        <div class="vw-avatar" style="background:#e53e3e">${n.charAt(0).toUpperCase()}</div>
+        <span class="vw-name">${n}</span>
+      </div>
+    `).join('');
+
+    if (listaWidget) listaWidget.innerHTML = html || '<div class="vw-empty">Ninguém online</div>';
+    if (contadorWidget) contadorWidget.innerText = nomes.length;
+    if (listaPainel) listaPainel.innerHTML = html || '<div style="color:#555;text-align:center;padding:20px;">Ninguém online</div>';
+    if (contadorPainel) contadorPainel.innerText = nomes.length;
+  }
+
+  // Rodar ao carregar a página
+  verificarNome();
+</script>
 </body>
 </html>
-</body>
-</html>
+
