@@ -206,6 +206,39 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   .logo-text{display:none;}
   .form-row{grid-template-columns:1fr;}
   .karaoke-header{gap:8px;}
+/* ===== COLE DENTRO DO SEU <style> (antes do </style>) ===== */
+
+/* Modal de nome */
+.nm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);align-items:center;justify-content:center;z-index:99999;padding:20px;}
+.nm-overlay.show{display:flex;}
+.nm-box{background:#111;border:1px solid rgba(229,62,62,.35);border-radius:22px;padding:44px 36px;max-width:400px;width:100%;text-align:center;animation:nmIn .3s ease;}
+@keyframes nmIn{from{opacity:0;transform:scale(.88) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.nm-box h2{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#f0f0f0;margin-bottom:6px;}
+.nm-box p{color:#888;font-size:13px;margin-bottom:22px;}
+.nm-input{width:100%;padding:13px 16px;background:#1a1a1a;border:1px solid #222;border-radius:10px;color:#f0f0f0;font-size:15px;outline:none;margin-bottom:12px;}
+.nm-input:focus{border-color:#e53e3e;}
+.nm-btn{width:100%;padding:13px;background:#e53e3e;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;}
+.nm-btn:hover{background:#c53030;}
+.nm-btn:disabled{opacity:.4;cursor:not-allowed;}
+.nm-hint{color:#555;font-size:11px;margin-top:8px;}
+
+/* Widget visitantes (canto inferior direito) */
+.vw-widget{position:fixed;bottom:20px;right:20px;width:290px;background:rgba(17,17,17,.97);border:1px solid rgba(229,62,62,.25);border-radius:16px;z-index:9000;display:none;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.5);}
+.vw-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;background:rgba(229,62,62,.08);border-bottom:1px solid rgba(229,62,62,.15);}
+.vw-head h3{font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px;color:#f0f0f0;}
+.vw-pulse{width:7px;height:7px;background:#4ade80;border-radius:50%;animation:vwp 2s infinite;}
+@keyframes vwp{0%,100%{opacity:1}50%{opacity:.4;transform:scale(1.5)}}
+.vw-cnt{background:rgba(74,222,128,.12);color:#4ade80;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:700;}
+.vw-list{padding:8px;max-height:300px;overflow-y:auto;}
+.vw-list::-webkit-scrollbar{width:3px;}
+.vw-list::-webkit-scrollbar-thumb{background:rgba(229,62,62,.3);border-radius:3px;}
+.vw-item{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:9px;margin-bottom:4px;}
+.vw-item.me{background:rgba(229,62,62,.08);border:1px solid rgba(229,62,62,.18);}
+.vw-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;position:relative;}
+.vw-dot{position:absolute;bottom:-1px;right:-1px;width:9px;height:9px;background:#4ade80;border-radius:50%;border:2px solid #111;}
+.vw-name{font-size:12px;font-weight:500;color:#f0f0f0;}
+.vw-you{font-size:10px;color:#e53e3e;margin-left:4px;}
+.vw-empty{text-align:center;padding:28px 12px;color:#555;font-size:12px;}
 }</style>
 </head>
 <body>
@@ -1164,6 +1197,12 @@ function renderHome() {
    </div>
 
    <button class="btn-karaoke" onclick="renderFerramentas()">🔧 Ferramentas</button>
+   <!-- ===== Item no menu Ferramentas ===== -->
+<!-- Localize no seu código a função que mostra as abas de ferramentas -->
+<!-- Exemplo: onde estão os botões como "Tradução de Texto", "Calculadora" etc. -->
+<!-- Adicione o item abaixo junto dos outros itens do menu de ferramentas: -->
+
+<button class="tool-tab" onclick="showToolTab('monitoramento')">📡 Monitoramento</button>
    ...
 </div>
     </nav>
@@ -1546,6 +1585,26 @@ function switchTool(tool) {
   else if(tool==='calc') sec.innerHTML = renderCalcHTML();
   else if(tool==='chat') sec.innerHTML = '<iframe class="iframe-wrap" src="https://joabeplay1.github.io/bate-papo/" allow="camera;microphone"></iframe>';
   else if(tool==='dama') sec.innerHTML = '<iframe class="iframe-wrap" src="https://joabeplay1.github.io/dama-brasileira-55/"></iframe>';
+<!-- ===== PAINEL DE MONITORAMENTO ===== -->
+<!-- Cole onde estão os outros <div class="tool-section"> no seu HTML -->
+<div class="tool-section" id="tool-monitoramento">
+  <div style="text-align:center;padding:20px 0 28px;">
+    <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);color:#4ade80;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;">
+      <span class="vw-pulse"></span> Ao Vivo
+    </span>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;margin:10px 0 4px;">Visitantes Online</h2>
+    <p style="color:#888;font-size:13px;">Quem está no Cine Play agora mesmo</p>
+  </div>
+  <div style="max-width:480px;margin:0 auto;background:#111;border:1px solid rgba(229,62,62,.2);border-radius:16px;overflow:hidden;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:rgba(229,62,62,.07);border-bottom:1px solid rgba(229,62,62,.13);">
+      <span style="font-size:13px;font-weight:700;color:#f0f0f0;">👥 Online agora</span>
+      <span class="vw-cnt" id="monCnt">0</span>
+    </div>
+    <div class="vw-list" id="monList" style="max-height:50vh;">
+      <div class="vw-empty">Nenhum visitante ainda</div>
+    </div>
+  </div>
+</div>
 }
 
 function renderCorretorHTML() {
@@ -1981,7 +2040,120 @@ particlesJS("particles-js", {
     document.body.style.overflow = 'auto'; // Destrava o scroll
   }
 </script>
+<!-- ===== MODAL DE NOME — Cole antes do </body> ===== -->
+<div class="nm-overlay" id="nmOverlay">
+  <div class="nm-box">
+    <div style="font-size:44px;margin-bottom:12px">👋</div>
+    <h2>Bem-vindo ao Cine Play!</h2>
+    <p>Digite seu nome para entrar e aparecer<br>na lista de visitantes online</p>
+    <input class="nm-input" type="text" id="nmInput" placeholder="Seu nome..." maxlength="30">
+    <button class="nm-btn" id="nmBtn" disabled>Entrar no Cine Play</button>
+    <p class="nm-hint">Mínimo de 2 caracteres</p>
+  </div>
+</div>
+<!-- ===== WIDGET VISITANTES — Cole antes do </body> ===== -->
+<div class="vw-widget" id="vwWidget">
+  <div class="vw-head">
+    <h3><span class="vw-pulse"></span> Online agora</h3>
+    <span class="vw-cnt" id="vwCnt">0</span>
+  </div>
+  <div class="vw-list" id="vwList">
+    <div class="vw-empty">Carregando...</div>
+  </div>
+</div>
+<!-- ===== SCRIPT FIREBASE — Cole antes do </body>, APÓS todos os outros scripts ===== -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, push, set, onValue, onDisconnect }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
+  // ═══════════════════════════════════════════════
+  //  SUBSTITUA PELAS SUAS CREDENCIAIS DO FIREBASE
+  // ═══════════════════════════════════════════════
+  const firebaseConfig = {
+    apiKey:            "SUA_API_KEY",
+    authDomain:        "SEU_PROJETO.firebaseapp.com",
+    databaseURL:       "https://SEU_PROJETO-default-rtdb.firebaseio.com",
+    projectId:         "SEU_PROJETO",
+    storageBucket:     "SEU_PROJETO.appspot.com",
+    messagingSenderId: "SEU_SENDER_ID",
+    appId:             "SEU_APP_ID"
+  };
+  // ═══════════════════════════════════════════════
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getDatabase(app);
+  const COLORS = ["#e53e3e","#2563eb","#16a34a","#9333ea","#ea580c","#0891b2","#d97706","#db2777"];
+  let myKey = null;
+
+  // ── INTERCEPTAR O LOGIN ORIGINAL ──────────────────────────────────
+  // O seu site usa a função doLogin(). Vamos "interceptar" ela:
+  // Encontre no seu código a linha:  sessionStorage.setItem('cp_auth', '1');
+  // Logo ABAIXO dessa linha, adicione:   mostrarModalNome();
+  // E REMOVA ou COMENTE a linha:        renderHome();
+  // Assim o fluxo fica: login correto → modal de nome → renderHome()
+  // ──────────────────────────────────────────────────────────────────
+
+  window.mostrarModalNome = function() {
+    document.getElementById('nmOverlay').classList.add('show');
+    setTimeout(() => document.getElementById('nmInput').focus(), 100);
+  };
+
+  // Modal de nome
+  const nmInput = document.getElementById('nmInput');
+  const nmBtn   = document.getElementById('nmBtn');
+  nmInput.addEventListener('input', () => { nmBtn.disabled = nmInput.value.trim().length < 2; });
+  nmInput.addEventListener('keydown', e => { if(e.key==='Enter' && nmInput.value.trim().length>=2) confirmarNome(); });
+  nmBtn.addEventListener('click', confirmarNome);
+
+  async function confirmarNome() {
+    const nome = nmInput.value.trim();
+    if (nome.length < 2) return;
+
+    // Fechar modal de nome
+    document.getElementById('nmOverlay').classList.remove('show');
+
+    // Mostrar widget
+    document.getElementById('vwWidget').style.display = 'block';
+
+    // Continuar para o site (chama a função original do Cine Play)
+    if (typeof renderHome === 'function') renderHome();
+
+    // Registrar no Firebase
+    const r = push(ref(db, 'visitantes_ativos'));
+    myKey = r.key;
+    await set(r, { nome, entrou: new Date().toISOString() });
+    await onDisconnect(r).remove();
+  }
+
+  // Escutar visitantes em tempo real
+  onValue(ref(db, 'visitantes_ativos'), snap => {
+    const data = snap.val();
+    const count = data ? Object.keys(data).length : 0;
+
+    document.querySelectorAll('.vw-cnt, #monCnt').forEach(el => el.textContent = count);
+
+    const renderList = (elId) => {
+      const el = document.getElementById(elId);
+      if (!el) return;
+      if (!data) { el.innerHTML = '<div class="vw-empty">Nenhum visitante online</div>'; return; }
+      let html = '';
+      Object.entries(data).forEach(([key, v], i) => {
+        const ini = (v.nome||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+        const cor = COLORS[i % COLORS.length];
+        const eu  = key === myKey;
+        html += `<div class="vw-item ${eu?'me':''}">
+          <div class="vw-avatar" style="background:${cor}">${ini}<span class="vw-dot"></span></div>
+          <span class="vw-name">${v.nome}${eu?'<span class="vw-you">(você)</span>':''}</span>
+        </div>`;
+      });
+      el.innerHTML = html;
+    };
+
+    renderList('vwList');
+    renderList('monList');
+  });
+</script>
 </body>
 </html>
 </body>
