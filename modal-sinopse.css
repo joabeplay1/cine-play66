@@ -91,6 +91,7 @@
 .modal-body {
   overflow-y: auto;   /* <-- ativa o scroll vertical */
   flex: 1;            /* <-- ocupa o espaço disponível entre capa e botões */
+  min-height: 0;      /* <-- ESSENCIAL: permite que o corpo encolha e ative a rolagem */
   padding: 20px 24px;
   scrollbar-width: thin;
   scrollbar-color: #333 #111;
@@ -99,7 +100,6 @@
 .modal-body::-webkit-scrollbar { width: 5px; }
 .modal-body::-webkit-scrollbar-track { background: #111; }
 .modal-body::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-
 .modal-title {
   font-size: 1.2rem;
   font-weight: 700;
