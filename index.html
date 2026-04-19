@@ -207,6 +207,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   .form-row{grid-template-columns:1fr;}
   .karaoke-header{gap:8px;}
 }</style>
+<link rel="stylesheet" href__="modal-sinopse.css">
 </head>
 <body>
   <div id="particles-js" style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1;"></div>
@@ -1377,9 +1378,22 @@ function renderGrid() {
   const w = document.getElementById('gridWrap');
   if (!w) return;
   const f = getFiltered();
-  if (!f.length) { w.innerHTML='<div class="empty"><div style="font-size:64px;opacity:.3;margin-bottom:16px">🎬</div><p style="font-size:18px;font-weight:600">Nenhum vídeo encontrado</p></div>'; return; }
+  if (!f.length) { 
+    w.innerHTML='<div class="empty"><div style="font-size:64px;opacity:.3;margin-bottom:16px">🎬</div><p style="font-size:18px;font-weight:600">Nenhum vídeo encontrado</p></div>'; 
+    return; 
+  }
+  
   w.innerHTML = '<div class="grid">' + f.map(v=>`
-    <div class="card">
+    <div class="card"
+      data-id="${v.id}"
+      data-title="${v.title}"
+      data-description="${v.description}"
+      data-thumbnail="${v.thumbnail_url}"
+      data-url="${v.video_url}"
+      data-year="${v.year}"
+      data-duration="${v.duration}"
+      data-category="${v.category}">
+      
       <div class="card-thumb" onclick="openDetail('${v.id}')" style="cursor:pointer">
         ${getThumbHtml(v)}
         <div class="card-overlay"><button class="play-btn">▶</button></div>
@@ -1981,7 +1995,7 @@ particlesJS("particles-js", {
     document.body.style.overflow = 'auto'; // Destrava o scroll
   }
 </script>
-
+<script src="modal-sinopse.js"></script>
 </body>
 </html>
 </body>
