@@ -135,42 +135,71 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   flex: 1;
 }
 
-/* === RODAPÉ FIXO COM BOTÕES === */
-.modal-footer {
-  display: flex;         /* Alinha os botões lado a lado */
-  gap: 12px;             /* Espaçamento entre os botões */
-  padding: 16px 20px;    /* Respiro interno */
-  background: #111;      /* Cor de fundo sólida */
-  border-top: 1px solid #222;
-  flex-shrink: 0;        /* ⚓ ESSENCIAL: Impede que o rodapé seja esmagado pelo texto */
-}
-
-/* Botão principal de Assistir */
-.btn-watch {
-  flex: 1;               /* Faz o botão ocupar o espaço restante */
-  height: 48px;          /* 📏 Altura fixa para manter o visual robusto */
-  display: flex;         /* Para centralizar o conteúdo interno */
+/* === ESTILO DO MODAL (ADICIONAR/EDITAR) === */
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85); /* Fundo escuro */
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;              /* Espaço entre ícone e texto */
-  
-  background: #c0392b;   /* Vermelho original */
+  z-index: 9999;
+  padding: 20px;
+}
+
+.modal-bg.hidden { display: none; }
+
+.modal {
+  background: #111; /* Cor escura do Cine Play */
+  border: 1px solid #222;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 520px;
+  padding: 28px;
+  max-height: 90vh;
+  overflow-y: auto; /* Permite rolar o formulário se for longo */
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+/* === RODAPÉ FIXO DO MODAL DE DETALHES (SINOPSE) === */
+.modal-footer {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  background: #111;
+  border-top: 1px solid #222;
+  flex-shrink: 0; /* ⚓ Não deixa os botões serem esmagados */
+}
+
+.btn-watch {
+  flex: 1;
+  height: 48px; /* 📏 Altura robusta */
+  background: #c0392b;
   color: #fff;
   border: none;
   border-radius: 12px;
-  
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
 }
 
-.btn-watch:hover {
-  background: #e74c3c;
-}
+.btn-watch:hover { background: #e74c3c; }
 
-.btn-watch:active {
-  transform: scale(0.98);
+.btn-fav {
+  width: 48px;
+  height: 48px;
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 /* Botão de Favorito (Coração) */
